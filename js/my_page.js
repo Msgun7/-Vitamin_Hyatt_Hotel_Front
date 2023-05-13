@@ -9,10 +9,10 @@ async function loadUserprofile() {
     email.innerText = response.profile.email
 
     const phone = document.getElementById("phone")
-    phone.innerText = response.profile.phone
+    phone.innerText = response.profile.phone.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
 
     const point = document.getElementById("point")
-    point.innerText = response.profile.point
+    point.innerText = `${response.profile.point} p`
 
 }
 

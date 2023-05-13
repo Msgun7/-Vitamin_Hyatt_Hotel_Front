@@ -11,8 +11,8 @@ async function injectNavbar() {
     document.querySelector("header").innerHTML = data;
 
     const payload = localStorage.getItem("payload");
+
     if (payload) {
-        const payload_parse = JSON.parse(payload)
 
         const mypage = document.getElementById("mypage")
         mypage.innerText = "마이페이지"

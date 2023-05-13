@@ -2,7 +2,7 @@ $(document).ready(function () {
     calendarInit();
 
     async function calendarInit() {
-        const response = await fetch(`http://127.0.0.1:8000/manager/customers/1/`, {
+        const response = await fetch(`http://127.0.0.1:8000/manager/cal/1/`, {
             headers: {
                 'content-type': 'application/json',
             },

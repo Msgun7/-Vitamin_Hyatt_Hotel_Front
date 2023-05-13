@@ -28,7 +28,6 @@ async function handleSignup() {
         })
     })
 
-
     if (response.status == 201) {
         document.getElementById("signup").querySelector('[data-bs-dismiss="modal"]').click();
     }
@@ -41,6 +40,10 @@ async function handleSignup() {
         console.log(match);
         alert(match)
 
+        console.log(response_json)
+
+        alert(response_json[ErrorDetail])
+
         // if (match && match.length > 1) {
         //     const extractedString = match[1];
         //     alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
@@ -50,6 +53,7 @@ async function handleSignup() {
         //     console.log('String not found');
         // }
     }
+
 }
 
 // 로그인
@@ -97,7 +101,7 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
+    window.location.replace(`${frontend_base_url}/index.html`)
     location.reload()
 }
 

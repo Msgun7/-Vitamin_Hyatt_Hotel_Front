@@ -44,15 +44,14 @@
             <div class="header">
                 <h2>객실 목록</h2>
                 <a class="location" target="_blank" href="https://www.naver.com/">
-                    <img class="cp-icon" src="/css/icons/ic-pin.svg" alt="Pin Icon">
+                    <img class="cp-icon" src="/css/vitamin_hyatt/icons/ic-pin.svg" alt="Pin Icon">
                     <span>위치보기</span>
                 </a>
             </div>
-
             <div class="contents" id="contents_id">
                 <a href="/review_detail.html" id='contents_id'>
                     <section class="cp-card content">
-                        <div class="thumb" style="background-image: url('/css/assets/main-fg2.webp');">
+                        <div class="thumb" style="background-image: url('/css/vitamin_hyatt/assets/main-fg2.webp');">
                         </div>
                         <div class="body">
                             <h4>객실 이름</h4>
@@ -142,32 +141,33 @@
                         객실 등록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/" method="post">
+                <form>
                     <div class="modal-body">
-                        <select name="spot">
-                            <option value="">지점선택</option>
-                            <option value="고양점">고양점</option>
-                            <option value="대구점">대구점</option>
-                            <option value="세종점">세종점</option>
-                            <option value="양주점">양주점</option>
-                            <option value="포항점">포항점</option>
+                        <select id="spot">
+                            <option value=>지점선택</option>
+                            <option value=1>고양점</option>
+                            <option value=2>대구점</option>
+                            <option value=3>세종점</option>
+                            <option value=4>양주점</option>
+                            <option value=5>포항점</option>
                         </select>
-                        <select name="status">
+                        <select id="status">
                             <option value="">상태</option>
                             <option value="checkin">check in</option>
                             <option value="empty">empty</option>
                         </select>
-                        <input name="name" type="text" class="form-control" placeholder="객실 이름">
-                        <input name="max_memver" type="number" class="form-control" placeholder="최대 인원">
-                        <input name="price" type="number" class="form-control" placeholder="가격">
-                        <textarea placeholder="description" style="width: 100%;"></textarea>
-                        <input name="img" type="file" class="form-control" placeholder="객실 이미지">
+                        <input id="name" type="text" class="form-control" placeholder="객실 이름">
+                        <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+                        <input id="price" type="number" class="form-control" placeholder="가격">
+                        <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+                        <input id="img" type="file" class="form-control" placeholder="객실 이미지">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
                         </button>
-                        <button type="submit" class="btn btn-primary" style="float: right">
-                            Save
+                        <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
+                            onclick="createRoom()">
+                            등록하기
                         </button>
                     </div>
                 </form>

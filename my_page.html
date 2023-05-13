@@ -79,6 +79,7 @@
             </tbody>
           </table>
           <h4 style="margin-top:50px;">예약 내역</h4>
+          <button type="button" id="submitBtn" data-userid="1">전송</button>
           <table style="width: 100%;">
             <thead>
               <tr>
@@ -86,15 +87,10 @@
                 <th>객실 이름</th>
                 <th>체크인</th>
                 <th>체크아웃</th>
+                <th>예약인원</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th>Row Header</th>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-              </tr>
+            <tbody id="mybook_info">
             </tbody>
           </table>
           <h4 style="margin-top:50px;">작성한 리뷰</h4>
@@ -104,17 +100,12 @@
               <tr>
                 <th class="pin">지점</th>
                 <th>객실 이름</th>
-                <th>별점</th>
+                <th>제목</th>
                 <th>내용</th>
+                <th>별점</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th>Row Header</th>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-              </tr>
+            <tbody id="myreview_info">
             </tbody>
           </table>
         </div>
@@ -278,8 +269,8 @@
         </div>
         <form>
           <div class="modal-body">
-            <input name="title" id="review-title" type="text" class="form-control" placeholder="제목">
-            <textarea name="content" id="review-content" class="form-control-content" cols="30" rows="10"
+            <input name="title" id="title" type="text" class="form-control" placeholder="제목">
+            <textarea name="content" id="context" class="form-control-content" cols="30" rows="10"
               placeholder="리뷰 작성"></textarea>
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupSelect01">별점</label>

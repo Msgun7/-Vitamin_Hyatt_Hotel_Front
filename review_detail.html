@@ -17,7 +17,7 @@
   <script src="/js/cal.js"></script>
   <script src="/js/api.js"></script>
   <script src="/js/loader.js"></script>
-  <script src="/js/loader.js"></script>
+  <script src="/js/review.js"></script>
   <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
   <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
@@ -216,43 +216,6 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="review" tabindex="-1" aria-labelledby="su" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="su">
-            후기 작성하기</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="/" method="post">
-          <div class="modal-body">
-            <input name="title" id="review-title" type="text" class="form-control" placeholder="제목">
-            <textarea name="content" id="review-content" class="form-control-content" cols="30" rows="10"
-              placeholder="리뷰 작성"></textarea>
-            <div class="input-group mb-3">
-              <label class="input-group-text" for="inputGroupSelect01">별점</label>
-              <select class="form-select" id="star">
-                <option selected>-- 선택하기 --</option>
-                <option value="1">⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="5">⭐⭐⭐⭐⭐</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-            </button>
-            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReviewCreate()">
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <script src="/js/review.js"></script>
 </body>
 
 </html>

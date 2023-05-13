@@ -9,8 +9,6 @@ window.onload = () => {
 // 그냥 맨처음에 들어가면 로그인/회원가입 
 
 // 회원가입이 된 유저가 로그인을 하고나면 마이페이지/로그아웃 이렇게 뜨도록
-
-
 // 회원가입 --> 잘못입력했을 때 에러메세지 띄우기
 async function handleSignup() {
     const username = document.getElementById("username").value
@@ -18,15 +16,6 @@ async function handleSignup() {
     const password = document.getElementById("password").value
     const password2 = document.getElementById("password2").value
     const phone = document.getElementById("phone").value
-
-    const autoHyphen = (phone) => {
-        return phone.replace(/[^0-9]/g, '')
-            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-            .replace(/(\-{1,2})$/g, "");
-    }
-
-    const phoneWithHyphen = autoHyphen(phone)
-
     console.log(username, email, password, password2, phone)
 
     const response = await fetch(`${backend_base_url}/users/signup/`, {
@@ -39,10 +28,9 @@ async function handleSignup() {
             "email": email,
             "password": password,
             "password2": password2,
-            "phone": phoneWithHyphen
+            "phone": phone
         })
-
-    });
+    })
 
 
     if (response.status == 201) {
@@ -53,12 +41,18 @@ async function handleSignup() {
 
         console.log(response_json)
 
-        alert(response_json['message'])
+        // 조건문분기 - 비밀번호 
+        const regex = /string='([^']+)'/;
+        const match = response_json.message.match(regex);
 
+        if (match && match.length > 1) {
+            const extractedString = match[1];
+            console.log(extractedString);
+        } else {
+            console.log('String not found');
+        }
     }
 }
-
-
 
 // 로그인
 async function handleSignin() {
@@ -93,6 +87,7 @@ async function handleSignin() {
 
         localStorage.setItem('payload', jsonPayload)
         document.getElementById("login").querySelector('[data-bs-dismiss="modal"]').click();
+        location.reload()
     }
     else {
         alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
@@ -105,11 +100,45 @@ function handleLogout() {
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
     window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
+    location.reload()
 }
 
-function checkLogin() {
+// 마이페이지 유저프로필 - 유저아이디 불러오기
+async function getUserprofile() {
+    let token = localStorage.getItem("access")
     const payload = localStorage.getItem("payload");
-    if (payload) {
-        window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
+    const payload_parse = JSON.parse(payload)
+
+    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        method: 'GET'
+    })
+
+    if (response.status == 200) {
+        const response_json = await response.json()
+        return response_json
+    } else {
+        alert("불러오는데 실패했습니다")
     }
+}
+
+// 회원탈퇴
+async function handlesUserDelete() {
+    let token = localStorage.getItem("access")
+    const payload = localStorage.getItem("payload");
+    const payload_parse = JSON.parse(payload)
+
+    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        method: 'DELETE',
+    })
+
+    localStorage.removeItem("access")
+    localStorage.removeItem("refresh")
+    localStorage.removeItem("payload")
+    window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
 }

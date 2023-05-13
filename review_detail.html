@@ -15,32 +15,16 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <script src="/js/cal.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/loader.js"></script>
+  <script src="/js/loader.js"></script>
   <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
   <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
   <header class="site-header navbar">
-    <div class="content max-width">
-      <a href="/index.html">
-        <img class="logo" src="/css/assets/logo.png" alt="Logo">
-      </a>
-      <nav>
-        <ul class="navbar">
-          <li><a href="/index.html">고양점</a></li>
-          <!-- <li><a href="">대구점</a></li>
-                    <li><a href="">세종점</a></li>
-                    <li><a href="">양주점</a></li>
-                    <li><a href="">포항점</a></li> -->
-          <!-- <li><a href="">로그아웃</a></li> -->
-          <li><a href="/book_user_list.html">예약자 조회</a></li>
-          <li><a href="" data-bs-toggle="modal" data-bs-target="#room">객실등록</a></li>
-          <li><a href="/my_page.html">마이페이지</a></li>
-          <li><a href="" data-bs-toggle="modal" data-bs-target="#login">로그인</a></li>
-          <li><a href="" data-bs-toggle="modal" data-bs-target="#signup">회원가입</a></li>
-        </ul>
-      </nav>
-    </div>
+    <!-- navbar -->
   </header>
   <main class="site-body">
     <article class="review-detail max-content-width">
@@ -111,6 +95,7 @@
     </article>
 
   </main>
+  <!-- 회원가입 모달창 -->
   <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="su" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -119,17 +104,19 @@
             Signup</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/" method="post">
+        <form>
           <div class="modal-body">
-            <input name="name" type="text" class="form-control" placeholder="Name">
-            <input name="phone" type="text" class="form-control" placeholder="Phone">
-            <input name="email" type="email" class="form-control" placeholder="Email">
-            <input name="password" type="password" class="form-control" placeholder="Password">
+            <input name="username" id="username" type="text" class="form-control" placeholder="Name">
+            <input name="email" id="email" type="email" class="form-control" placeholder="Email">
+            <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+            <input name="password2" id="password2" type="password" class="form-control" placeholder="Password2">
+            <input name="phone" id="phone" type="text" oninput="autoHyphen(this)" class="form-control"
+              placeholder="Phone">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
             </button>
-            <button type="submit" class="btn btn-primary" style="float: right">
+            <button type="button" onclick="handleSignup()" class="btn btn-primary" style="float: right">
               Signup
             </button>
           </div>
@@ -137,6 +124,7 @@
       </div>
     </div>
   </div>
+  <!-- 로그인 모달창 -->
   <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -145,15 +133,15 @@
             Login</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/" method="post">
+        <form>
           <div class="modal-body">
-            <input name="email" type="email" class="form-control" placeholder="Email">
-            <input name="password" type="password" class="form-control" placeholder="Password">
+            <input name="email" id="login-email" type="email" class="form-control" placeholder="Email">
+            <input name="password" id="login-password" type="password" class="form-control" placeholder="Password">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
             </button>
-            <button type="submit" class="btn btn-primary" style="float: right">
+            <button type="button" onclick="handleSignin()" class="btn btn-primary" style="float: right">
               Login
             </button>
           </div>

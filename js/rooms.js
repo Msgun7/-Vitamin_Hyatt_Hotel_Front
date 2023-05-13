@@ -1,5 +1,5 @@
 window.onload = () => {
-    
+
 }
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {
@@ -9,39 +9,28 @@ async function createRoom() {
     const status = document.getElementById("status").value;
     const price = parseInt(document.getElementById("price").value);
     const description = document.getElementById("description").value;
-    const img = document.getElementById("img").files[0];
-    //바닐라 = documents
+    const img = document.getElementById("img");
 
-    const data = {
-        name: name,
-        max_members: max_members,
-        spot: spot,
-        status: status,
-        price: price,
-        description: description,
-        img: img
-    };
-    console.log(data)
+    console.log(img.files[0]);
+
+
+    const formData = new FormData();
+    formData.append("name", name,);
+    formData.append("max_members", max_members);
+    formData.append("spot", spot);
+    formData.append("status", status);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("image", img.files[0]);
+
+
+    console.log(formData);
 
     response = await fetch('http://127.0.0.1:8000/manager/rooms/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
     })
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.log(error));
 }
-// fetch()함수를 사용하여 HTTP 요청을 보내고 응답을 처리하는 예시 코드
-// async function roomList() {
-//     const response = await fetch('http://127.0.0.1:8000/manager/spot/',{
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-
-//     console.log(data)
-// }

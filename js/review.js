@@ -1,13 +1,19 @@
-window.onload = async function () {
-  console.log("온로드");
-  // await loadUserprofile();
-  await getReviews();
-};
+// document.addEventListener("DOMContentLoaded", function () {
+//   const submitBtn = document.getElementById("submitBtn");
+//   submitBtn.addEventListener("click", getReviews);
+// })
 
-async function getReviews() {
-  console.log("겟 테스트")
-
-  const response = await fetch(`${backend_base_url}/reviews/room/1/`, {
+async function getReviews(event) {
+  console.log("테스트")
+  params = new URLSearchParams(window.location.search)
+  room_id = params.get('room_id')
+  console.log(room_id)
+  // const room_id = event.target.dataset.userid;
+  // const data = {
+  //   "room_id": room_id
+  // };
+  // console.log(data)
+  const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -55,3 +61,4 @@ async function getReviews() {
   }
 }
 
+getReviews();

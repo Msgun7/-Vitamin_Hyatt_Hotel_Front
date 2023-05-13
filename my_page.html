@@ -17,7 +17,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-  <script src="/js/cal.js"></script>
   <script src="/js/api.js"></script>
   <script src="/js/loader.js"></script>
   <script src="/js/my_page.js"></script>
@@ -82,7 +81,6 @@
             </tbody>
           </table>
           <h4 style="margin-top:50px;">예약 내역</h4>
-          <button type="button" id="submitBtn" data-userid="1">전송</button>
           <table style="width: 100%;">
             <thead>
               <tr>
@@ -223,45 +221,45 @@
   </div>
   <div class="modal fade" id="room" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    객실 등록</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form>
-                <div class="modal-body">
-                    <select id="spot">
-                        <option value=>지점선택</option>
-                        <option value=1>고양점</option>
-                        <option value=2>대구점</option>
-                        <option value=3>세종점</option>
-                        <option value=4>양주점</option>
-                        <option value=5>포항점</option>
-                    </select>
-                    <select id="status">
-                        <option value="">상태</option>
-                        <option value="checkin">check in</option>
-                        <option value="empty">empty</option>
-                    </select>
-                    <input id="name" type="text" class="form-control" placeholder="객실 이름">
-                    <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
-                    <input id="price" type="number" class="form-control" placeholder="가격">
-                    <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
-                    <input id="img" type="file" class="form-control" placeholder="객실 이미지">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                    </button>
-                    <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
-                        onclick="createRoom()">
-                        등록하기
-                    </button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            객실 등록</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form>
+          <div class="modal-body">
+            <select id="spot">
+              <option value=>지점선택</option>
+              <option value=1>고양점</option>
+              <option value=2>대구점</option>
+              <option value=3>세종점</option>
+              <option value=4>양주점</option>
+              <option value=5>포항점</option>
+            </select>
+            <select id="status">
+              <option value="">상태</option>
+              <option value="checkin">check in</option>
+              <option value="empty">empty</option>
+            </select>
+            <input id="name" type="text" class="form-control" placeholder="객실 이름">
+            <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+            <input id="price" type="number" class="form-control" placeholder="가격">
+            <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+            <input id="img" type="file" class="form-control" placeholder="객실 이미지">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button id="submitBtn" type="button" class="btn btn-primary" style="float: right" onclick="createRoom()">
+              등록하기
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  <!-- 후기 작성 모달창 -->
   <div class="modal fade" id="review" tabindex="-1" aria-labelledby="su" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -292,6 +290,34 @@
             </button>
             <button type="button" class="btn btn-primary" style="float: right" onclick="handleReviewCreate()">
               Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- 예약 상세 조회 모달창 -->
+  <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <h6 id="change-username">Name : 김미영</h6>
+            <h6 id="change-email">Email : kmy9810@naver.com</h6>
+            <h6 id="change-point">Point : 100p</h6>
+            <input name="phone" type="text" class="form-control" placeholder="phone" id="change-phone">
+            <input name="password" type="password" class="form-control" placeholder="Password" id="change-password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" class="btn btn-primary" style="float: right" onclick="handlesProfileChange()">
+              정보 수정
             </button>
           </div>
         </form>

@@ -15,11 +15,9 @@ async function loadUserprofile() {
   point.innerText = response.profile.point
 
 }
-window.onload = async function () {
-  console.log("온로드");
-  // await loadUserprofile();
-  await getArticles();
-};
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -60,7 +58,6 @@ async function getArticles() {
                   </tr>`
     $('#myreview_info').append(temp_html)
   })
-
   //내 예약 조회 
   $('#mybook_info').empty()
   console.log(response_json)
@@ -70,6 +67,10 @@ async function getArticles() {
     const check_in = a['check_in']
     const check_out = a['check_out']
     const members = a['members']
+    const book_id = a['id'];
+
+    console.log(book_id);
+
 
     let temp_html = `<tr>
                       <th>${spot}</th>
@@ -77,10 +78,11 @@ async function getArticles() {
                       <td>${check_in}</td>
                       <td>${check_out}</td>
                       <td>${members}</td>
+                      <td><button>상세</button></td>
                   </tr>`
     $('#mybook_info').append(temp_html)
-  })
 
+  })
 
   if (response.status == 200) {
     const response_json = await response.json()
@@ -135,3 +137,7 @@ async function handleReviewCreate() {
   const response_json = await response.json();
   console.log(response_json);
 }
+
+
+loadUserprofile();
+getArticles();

@@ -1,5 +1,5 @@
 async function injectNavbar() {
-    fetch("/vitamin_hyatt/navbar.html").then(response => {
+    fetch("/navbar.html").then(response => {
         return response.text()
     })
         .then(data => {

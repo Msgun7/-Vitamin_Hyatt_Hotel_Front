@@ -1,12 +1,12 @@
 async function injectNavbar() {
-    fetch("/vitamin_hyatt/navbar.html").then(response => {
+    fetch("/navbar.html").then(response => {
         return response.text()
     })
         .then(data => {
             document.querySelector("header").innerHTML = data;
         })
 
-    let navbarHtml = await fetch("/vitamin_hyatt/navbar.html")
+    let navbarHtml = await fetch("/navbar.html")
     let data = await navbarHtml.text()
     document.querySelector("header").innerHTML = data;
 

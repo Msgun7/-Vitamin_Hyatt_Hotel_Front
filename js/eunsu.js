@@ -5,7 +5,7 @@ window.onload = () => {
 }
 
 async function RoomviewBySpot() {
-
+    const root_address = "http://127.0.0.1:8000"; // 여기에 자신의 루트 주소를 입력하세요
     const fetch_url = 'http://127.0.0.1:8000/manager/roomsbyspot/' + '1'
     const response = await fetch(fetch_url, {
     });
@@ -17,8 +17,8 @@ async function RoomviewBySpot() {
     response_json.forEach((a) => {
         const roomname = a["name"];
         const price = a["price"];
-        const image = a["image"];
-
+        const image = root_address + a["image"];
+        console.log(image)
         console.log(roomname);
 
         let temp = `<a href="/vitamin_hyatt/review_detail.html">

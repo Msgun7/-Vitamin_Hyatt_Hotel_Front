@@ -6,10 +6,6 @@ window.onload = () => {
     console.log('자바스크립트 불러왔음!')
 }
 
-// 그냥 맨처음에 들어가면 로그인/회원가입 
-
-// 회원가입이 된 유저가 로그인을 하고나면 마이페이지/로그아웃 이렇게 뜨도록
-// 회원가입 --> 잘못입력했을 때 에러메세지 띄우기
 async function handleSignup() {
     const username = document.getElementById("username").value
     const email = document.getElementById("email").value
@@ -38,19 +34,21 @@ async function handleSignup() {
     }
     else {
         const response_json = await response.json()
+        console.log(response_json);
 
-        console.log(response_json)
-
-        // 조건문분기 - 비밀번호 
         const regex = /string='([^']+)'/;
-        const match = response_json.message.match(regex);
+        const match = response_json.message(regex);
+        console.log(match);
+        alert(match)
 
-        if (match && match.length > 1) {
-            const extractedString = match[1];
-            console.log(extractedString);
-        } else {
-            console.log('String not found');
-        }
+        // if (match && match.length > 1) {
+        //     const extractedString = match[1];
+        //     alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
+        //     console.log(match);
+        // } else {
+        //     alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
+        //     console.log('String not found');
+        // }
     }
 }
 
@@ -140,5 +138,5 @@ async function handlesUserDelete() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
+    window.location.replace(`${frontend_base_url}/index.html`)
 }

@@ -14,7 +14,6 @@ async function loadUserprofile() {
     const point = document.getElementById("point")
     point.innerText = response.profile.point
 
-
 }
 
 window.onload = async function () {

@@ -21,7 +21,7 @@ async function RoomviewBySpot() {
 
         console.log(roomname);
 
-        let temp = `<a href="/vitamin_hyatt/review_detail.html">
+        let temp = `<a href="/review_detail.html">
                 <section class="cp-card content">
                     <div class="thumb" style="background-image: url(${image});">
                     </div>
@@ -40,8 +40,8 @@ async function RoomviewBySpot() {
                     </div>
                 </section>
             </a>`;
-        
-            
+
+
         $("#contents_id").append(temp);
     });
 }

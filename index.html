@@ -45,7 +45,7 @@
             <div class="header">
                 <h2>객실 목록</h2>
                 <a class="location" target="_blank" href="https://www.naver.com/">
-                    <img class="cp-icon" src="/css/vitamin_hyatt/icons/ic-pin.svg" alt="Pin Icon">
+                    <img class="cp-icon" src="/css/icons/ic-pin.svg" alt="Pin Icon">
                     <span>위치보기</span>
                 </a>
             </div>
@@ -143,7 +143,7 @@
                         객실 등록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form enctype="multipart/form-data">
                     <div class="modal-body">
                         <select id="spot">
                             <option value=>지점선택</option>
@@ -162,7 +162,7 @@
                         <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
                         <input id="price" type="number" class="form-control" placeholder="가격">
                         <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
-                        <input id="img" type="file" class="form-control" placeholder="객실 이미지">
+                        <input id="img" type="file" accept="image/*" multiple>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기

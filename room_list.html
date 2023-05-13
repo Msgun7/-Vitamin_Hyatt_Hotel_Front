@@ -14,10 +14,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/loader.js"></script>
+    <script src="/js/room_list.js"></script>
     <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
-    <link href="/css/styles/eunsu.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -43,18 +47,10 @@
                             <th>상태변경</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>고양점</td>
-                            <td>스위트룸</td>
-                            <td>50000</td>
-                            <td>3</td>
-                            <td>empty</td>
-                            <td>
+                    <tbody id="room_info">
+                        <!-- <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#status">변경</a>
-                            </td>
-                        </tr>
+                            </td> -->
                     </tbody>
                 </table>
             </div>
@@ -126,68 +122,39 @@
                         객실 등록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/" method="post">
+                <form>
                     <div class="modal-body">
-                        <select name="spot">
-                            <option value="">지점선택</option>
-                            <option value="고양점">고양점</option>
-                            <option value="대구점">대구점</option>
-                            <option value="세종점">세종점</option>
-                            <option value="양주점">양주점</option>
-                            <option value="포항점">포항점</option>
+                        <select id="spot">
+                            <option value=>지점선택</option>
+                            <option value=1>고양점</option>
+                            <option value=2>대구점</option>
+                            <option value=3>세종점</option>
+                            <option value=4>양주점</option>
+                            <option value=5>포항점</option>
                         </select>
-                        <select name="status">
+                        <select id="status">
                             <option value="">상태</option>
                             <option value="checkin">check in</option>
                             <option value="empty">empty</option>
                         </select>
-                        <input name="name" type="text" class="form-control" placeholder="객실 이름">
-                        <input name="max_memver" type="number" class="form-control" placeholder="최대 인원">
-                        <input name="price" type="number" class="form-control" placeholder="가격">
-                        <textarea placeholder="description" style="width: 100%;"></textarea>
-                        <input name="img" type="file" class="form-control" placeholder="객실 이미지">
+                        <input id="name" type="text" class="form-control" placeholder="객실 이름">
+                        <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+                        <input id="price" type="number" class="form-control" placeholder="가격">
+                        <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+                        <input id="img" type="file" class="form-control" placeholder="객실 이미지">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
                         </button>
-                        <button type="submit" class="btn btn-primary" style="float: right">
-                            Save
+                        <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
+                            onclick="createRoom()">
+                            등록하기
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        상태 변경</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="/" method="post">
-                    <div class="modal-body">
-                        <select name="status">
-                            <option value="">상태</option>
-                            <option value="checkin">check in</option>
-                            <option value="empty">empty</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                        </button>
-                        <button type="submit" class="btn btn-primary" style="float: right">
-                            Save
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script src="/js/cal.js"></script>
-    <script src="/js/api.js"></script>
-    <script src="/js/loader.js"></script>
 </body>
 
 </html>

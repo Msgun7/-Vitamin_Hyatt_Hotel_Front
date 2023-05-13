@@ -14,40 +14,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="/js/cal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="/js/api.js"></script>
     <script src="/js/loader.js"></script>
+    <script src="/js/rooms.js"></script>
     <script src="/js/book_user_list.js"></script>
     <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
+    <script src="/js/api.js"></script>
+    <script src="/js/loader.js"></script>
 
 </head>
 
 <body>
+    <!-- nav start -->
     <header class="site-header navbar">
         <!-- navbar -->
-        <div class="content max-width">
-            <a href="/index.html">
-                <img class="logo" src="/css/assets/logo.png" alt="Logo">
-            </a>
-            <nav>
-                <ul class="navbar">
-                    <li><a href="/index.html">고양점</a></li>
-                    <!-- <li><a href="">대구점</a></li>
-                    <li><a href="">세종점</a></li>
-                    <li><a href="">양주점</a></li>
-                    <li><a href="">포항점</a></li> -->
-                    <!-- <li><a href="">로그아웃</a></li> -->
-                    <li><a href="/book_user_list.html">예약자 조회</a></li>
-                    <li><a href="/room_list.html">객실 조회</a></li>
-                    <li><a href="" data-bs-toggle="modal" data-bs-target="#room">객실등록</a></li>
-                    <li><a href="/my_page.html">마이페이지</a></li>
-                    <li><a href="" data-bs-toggle="modal" data-bs-target="#login">로그인</a></li>
-                    <li><a href="" data-bs-toggle="modal" data-bs-target="#signup">회원가입</a></li>
-                </ul>
-            </nav>
-        </div>
     </header>
+    <!-- nav end -->
     <main class="site-body">
         <article class="review-detail max-content-width">
             <div class="review-info">
@@ -55,15 +41,9 @@
             </div>
             <div class="content" style="display:inline-block; width:100%; margin-left:30px">
                 <h4>예약자 명단</h4>
-                <select name="객실">
+                <select name="객실" id="select_room" onchange="bookUserList()">
                     <option value="">객실선택</option>
-                    <option value="스위트룸">스위트룸</option>
-                    <a class="back-link" href="/index.html">&lt; 목록으로</a>
-            </div>
-            <div class="content" style="display:inline-block; width:100%; margin-left:30px">
-                <h4>예약자 명단</h4>
-                <select name="객실" id="selet_room_category" onchange="bookUserList()">
-                    <option value="-1">객실</option>
+
                 </select>
                 <table style="width: 100%;">
                     <thead>
@@ -152,32 +132,33 @@
                         객실 등록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/" method="post">
+                <form>
                     <div class="modal-body">
-                        <select name="spot">
-                            <option value="">지점선택</option>
-                            <option value="고양점">고양점</option>
-                            <option value="대구점">대구점</option>
-                            <option value="세종점">세종점</option>
-                            <option value="양주점">양주점</option>
-                            <option value="포항점">포항점</option>
+                        <select id="spot">
+                            <option value=>지점선택</option>
+                            <option value=1>고양점</option>
+                            <option value=2>대구점</option>
+                            <option value=3>세종점</option>
+                            <option value=4>양주점</option>
+                            <option value=5>포항점</option>
                         </select>
-                        <select name="status">
+                        <select id="status">
                             <option value="">상태</option>
                             <option value="checkin">check in</option>
                             <option value="empty">empty</option>
                         </select>
-                        <input name="name" type="text" class="form-control" placeholder="객실 이름">
-                        <input name="max_memver" type="number" class="form-control" placeholder="최대 인원">
-                        <input name="price" type="number" class="form-control" placeholder="가격">
-                        <textarea placeholder="description" style="width: 100%;"></textarea>
-                        <input name="img" type="file" class="form-control" placeholder="객실 이미지">
+                        <input id="name" type="text" class="form-control" placeholder="객실 이름">
+                        <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+                        <input id="price" type="number" class="form-control" placeholder="가격">
+                        <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+                        <input id="img" type="file" class="form-control" placeholder="객실 이미지">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
                         </button>
-                        <button type="submit" class="btn btn-primary" style="float: right">
-                            Save
+                        <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
+                            onclick="createRoom()">
+                            등록하기
                         </button>
                     </div>
                 </form>

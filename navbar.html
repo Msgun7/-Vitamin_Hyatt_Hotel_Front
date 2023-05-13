@@ -1,3 +1,9 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
 <!-- navbar -->
 <div class="content max-width">
     <a href="/index.html">
@@ -19,13 +25,11 @@
                     <li><a class="dropdown-item" href="#">포항점</a></li>
                 </ul>
             </li>
-            <li><a href="/book_user_list.html">예약자 조회</a></li>
-            <li><a href="/room_list.html">객실 조회</a></li>
-            <li><a href="" data-bs-toggle="modal" data-bs-target="#room">객실등록</a></li>
-            </li>
-
             <li id="authorized">
                 <!-- 로그인 O -->
+            <li><a href="/book_user_list.html" id="adminBookUserList"></a></li>
+            <li><a href="/room_list.html" id="adminRoomList"></a></li>
+            <li><a href="" data-bs-toggle="modal" data-bs-target="#room" id="adminRoomSave"></a></li>
             <li class="nav-item"><a href="/my_page.html" id="mypage"></a></li>
             <li class="nav-item"><a href="" onclick="handleLogout()" id="logout"></a></li>
             <!-- 로그인 X -->

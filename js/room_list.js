@@ -35,25 +35,43 @@ async function roomList() {
         const max_members = a['max_members']
         const status = a['status']
 
+        if (status == 'empty') {
+            let temp_html = `<tr>
+            <th>${a.id}</th>
+            <th>${spot}</th>
+            <th>${name}</th>
+            <td>${price}</td>
+            <td>${max_members}</td>
+            <td style='color:blue;'>${status}</td>
+            <td><button class="btn btn-secondary"
+            onclick="changeStatus(${a.id}, '${status === 'empty' ? 'checkin' : 'empty'}')">객실상태 변경</button></td>
+        </tr>`
+            $('#room_info').append(temp_html)
 
-        let temp_html = `<tr>
-                            <th>${a.id}</th>
-                            <th>${spot}</th>
-                            <th>${name}</th>
-                            <td>${price}</td>
-                            <td>${max_members}</td>
-                            <td>${status}</td>
-                            <td><button onclick="changeStatus(${a.id}, '${status === 'empty' ? 'checkin' : 'empty'}')">객실상태 변경</button></td>
-                        </tr>`
-        $('#room_info').append(temp_html)
+        } else {
+            let temp_html2 = `<tr>
+            <th>${a.id}</th>
+            <th>${spot}</th>
+            <th>${name}</th>
+            <td>${price}</td>
+            <td>${max_members}</td>
+            <td style='color:red;'>${status}</td>
+            <td><button class="btn btn-secondary"
+            onclick="changeStatus(${a.id}, '${status === 'empty' ? 'checkin' : 'empty'}')">객실상태 변경</button></td>
+        </tr>`
+            $('#room_info').append(temp_html2)
+        }
+
+
     })
 }
 // 객실상태 변경 버튼을 클릭했을시 patch로 데이터 베이스의 값을 바꿀 수 있도록 하였습니다.
 async function changeStatus(id, status) {
+    const accessToken = localStorage.getItem('access')
     const response = await fetch(`http://127.0.0.1:8000/manager/rooms/${id}/`, {
         headers: {
             'content-type': 'application/json',
-            // 'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${accessToken}`
         },
         method: 'PATCH',
         body: JSON.stringify({ status }),

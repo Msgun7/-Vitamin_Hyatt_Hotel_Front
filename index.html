@@ -27,155 +27,151 @@
 </head>
 
 <body>
-    <!-- nav start -->
-    <header class="site-header navbar">
-        <!-- navbar -->
-    </header>
-    <!-- nav end -->
-    <!-- content start -->
-    <main class="site-body">
-        <div class="main-header">
-            <div class="content">
-                <div class="fg"></div>
-                <h1>Vitamin Hyatt Hotel</h1>
-            </div>
-        </div>
-        <div class="content-list max-content-width">
-            <div class="header">
-                <h2>객실 목록</h2>
-                <a class="location" target="_blank" href="https://www.naver.com/">
-                    <img class="cp-icon" src="/css/icons/ic-pin.svg" alt="Pin Icon">
-                    <span>위치보기</span>
-                </a>
-            </div>
-            <div class="contents" id="contents_id">
-                <a href="/review_detail.html" id='contents_id'>
+  <!-- nav start -->
+  <header class="site-header navbar">
+    <!-- navbar -->
+  </header>
+  <!-- nav end -->
+  <!-- content start -->
+  <main class="site-body">
+    <div class="main-header">
+      <div class="content">
+        <div class="fg"></div>
+        <h1>Vitamin Hyatt Hotel</h1>
+      </div>
+    </div>
+    <div class="content-list max-content-width">
+      <div class="header">
+        <h2>객실 목록</h2>
+        <a class="location" target="_blank" href="https://www.naver.com/">
+          <img class="cp-icon" src="/css/vitamin_hyatt/icons/ic-pin.svg" alt="Pin Icon">
+          <span>위치보기</span>
+        </a>
+      </div>
+      <div class="contents" id="contents_id">
+        <a href="/review_detail.html" id='contents_id'>
 
-                    <section class="cp-card content">
-                        <div class="thumb" style="background-image: url('/css/assets/main-fg2.webp');">
-                        </div>
-                        <div class="body">
-                            <h4>객실 이름</h4>
-                            <div class="metadata">
-                                <div class="review-rating">
-                                    <span class="cp-stars">
-                                        ★
-                                    </span>
-                                </div>
-                                <div class="review-author">
-                                    <span>가격</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </a>
+          <section class="cp-card content">
+            <div class="thumb" style="background-image: url('/css/vitamin_hyatt/assets/main-fg2.webp');">
             </div>
-        </div>
-    </main>
-    <!-- content end -->
-    <!-- sign up start -->
-    <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="su" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="su">
-                        Signup</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="body">
+              <h4>객실 이름</h4>
+              <div class="metadata">
+                <div class="review-rating">
+                  <span class="cp-stars">
+                    ★
+                  </span>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <input name="username" id="username" type="text" class="form-control" placeholder="Name">
-                        <input name="email" id="email" type="email" class="form-control" placeholder="Email">
-                        <input name="password" id="password" type="password" class="form-control"
-                            placeholder="Password">
-                        <input name="password2" id="password2" type="password" class="form-control"
-                            placeholder="Password2">
-                        <input name="phone" id="phone" type="text" oninput="autoHyphen(this)" class="form-control"
-                            placeholder="Phone">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                        </button>
-                        <button type="button" onclick="handleSignup()" class="btn btn-primary" style="float: right">
-                            Signup
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- sign up end -->
-    <!-- login start -->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="review-author">
+                  <span>가격</span>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <!-- input에 id값 추가하기 -->
-                        <input name="email" id="login-email" type="email" class="form-control" placeholder="Email">
-                        <input name="password" id="login-password" type="password" class="form-control"
-                            placeholder="Password">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                        </button>
-                        <button type="button" onclick="handleSignin()" class="btn btn-primary" style="float: right">
-                            Login
-                        </button>
-                    </div>
-                </form>
+              </div>
             </div>
-        </div>
+          </section>
+        </a>
+      </div>
     </div>
-    <!-- login end -->
-    <!-- room start -->
-    <div class="modal fade" id="room" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        객실 등록</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <select id="spot">
-                            <option value=>지점선택</option>
-                            <option value=1>고양점</option>
-                            <option value=2>대구점</option>
-                            <option value=3>세종점</option>
-                            <option value=4>양주점</option>
-                            <option value=5>포항점</option>
-                        </select>
-                        <select id="status">
-                            <option value="">상태</option>
-                            <option value="checkin">check in</option>
-                            <option value="empty">empty</option>
-                        </select>
-                        <input id="name" type="text" class="form-control" placeholder="객실 이름">
-                        <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
-                        <input id="price" type="number" class="form-control" placeholder="가격">
-                        <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
-                        <input id="img" type="file" class="form-control" placeholder="객실 이미지">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                        </button>
-                        <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
-                            onclick="createRoom()">
-                            등록하기
-                        </button>
-                    </div>
-                </form>
-            </div>
+  </main>
+  <!-- content end -->
+  <!-- sign up start -->
+  <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="su" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="su">
+            Signup</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form>
+          <div class="modal-body">
+            <input name="username" id="username" type="text" class="form-control" placeholder="Name">
+            <input name="email" id="email" type="email" class="form-control" placeholder="Email">
+            <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+            <input name="password2" id="password2" type="password" class="form-control" placeholder="Password2">
+            <input name="phone" id="phone" type="text" oninput="autoHyphen(this)" class="form-control"
+              placeholder="Phone">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" onclick="handleSignup()" class="btn btn-primary" style="float: right">
+              Signup
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- room end -->
+  </div>
+  <!-- sign up end -->
+  <!-- login start -->
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <!-- input에 id값 추가하기 -->
+            <input name="email" id="login-email" type="email" class="form-control" placeholder="Email">
+            <input name="password" id="login-password" type="password" class="form-control" placeholder="Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" onclick="handleSignin()" class="btn btn-primary" style="float: right">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- login end -->
+  <!-- room start -->
+  <div class="modal fade" id="room" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            객실 등록</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <select id="spot">
+              <option value=>지점선택</option>
+              <option value=1>고양점</option>
+              <option value=2>대구점</option>
+              <option value=3>세종점</option>
+              <option value=4>양주점</option>
+              <option value=5>포항점</option>
+            </select>
+            <select id="status">
+              <option value="">상태</option>
+              <option value="checkin">check in</option>
+              <option value="empty">empty</option>
+            </select>
+            <input id="name" type="text" class="form-control" placeholder="객실 이름">
+            <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+            <input id="price" type="number" class="form-control" placeholder="가격">
+            <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+            <input id="img" type="file" class="form-control" placeholder="객실 이미지">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button id="submitBtn" type="button" class="btn btn-primary" style="float: right" onclick="createRoom()">
+              등록하기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- room end -->
 </body>
 
 </html>

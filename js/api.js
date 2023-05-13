@@ -30,28 +30,21 @@ async function handleSignup() {
 
     if (response.status == 201) {
         document.getElementById("signup").querySelector('[data-bs-dismiss="modal"]').click();
+        alert("회원가입이 완료되었습니다!")
     }
     else {
+
         const response_json = await response.json()
-        console.log(response_json);
 
         const regex = /string='([^']+)'/;
-        const match = response_json.message(regex);
-        console.log(match);
-        alert(match)
+        const match = JSON.stringify(response_json).match(regex)
+        console.log(match)
 
-        console.log(response_json)
+        if (match && match.length > 1) {
+            const cleanedString = match[1].replace("string=", "");
+            alert("※ " + cleanedString);
 
-        alert(response_json[ErrorDetail])
-
-        // if (match && match.length > 1) {
-        //     const extractedString = match[1];
-        //     alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
-        //     console.log(match);
-        // } else {
-        //     alert("※이메일 혹은 비밀번호가 올바르지 않습니다!")
-        //     console.log('String not found');
-        // }
+        }
     }
 
 }
@@ -101,8 +94,9 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/index.html`)
-    location.reload()
+    window.location.href = `${frontend_base_url}/index.html`;
+    // window.location.replace(`${frontend_base_url}/index.html`)
+    // location.reload()
 }
 
 // 마이페이지 유저프로필 - 유저아이디 불러오기
@@ -126,6 +120,60 @@ async function getUserprofile() {
     }
 }
 
+// 유저 정보 수정
+async function updateUserprofile() {
+
+    let token = localStorage.getItem("access")
+    const payload = localStorage.getItem("payload");
+    const payload_parse = JSON.parse(payload)
+    console.log(payload_parse.email)
+    console.log("1")
+
+    const password = document.getElementById('newpassword').value;
+    const phone = document.getElementById('newphone').value;
+
+    const bodyData = {};
+    if (password) {
+        bodyData.password = password;
+    }
+    if (phone) {
+        bodyData.phone = phone;
+    }
+
+    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            'content-type': 'application/json',
+        },
+        method: 'PATCH',
+        body: JSON.stringify(bodyData)
+    })
+    console.log(response)
+    console.log("2")
+
+    if (response.status == 200) {
+        alert("회원정보가 변경되었습니다!")
+        location.reload()
+    }
+    if (response.status === 400) {
+        const response_json = await response.json();
+
+        if (response_json.phone) {
+            const phone_error_message = response_json.phone[0];
+            alert(`※ ${phone_error_message}`);
+        }
+        else if (response_json.password) {
+            const password_error_message = response_json.password[0];
+            alert(`※ ${password_error_message}`);
+        } else {
+            alert("※ 에러가 발생하였습니다.");
+        }
+    }
+    else {
+        alert("※ 변경할 사항을 입력해주세요!");
+    }
+}
+
 // 회원탈퇴
 async function handlesUserDelete() {
     let token = localStorage.getItem("access")
@@ -144,3 +192,4 @@ async function handlesUserDelete() {
     localStorage.removeItem("payload")
     window.location.replace(`${frontend_base_url}/index.html`)
 }
+

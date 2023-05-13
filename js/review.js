@@ -20,16 +20,14 @@ async function getReviews() {
   const response_json = await response.json()
   $('#roomreview_info').empty()
   console.log(response_json)
-  response_json['reviews'].forEach((a) => {
-    const context = a['context']
-    const room = a['room']
+  response_json['review_set'].forEach((a) => {
+    const username = a['user']
     const title = a['title']
-    const spot = a['spot']
+    const context = a['context']
     const star = a['stars']
 
     let temp_html = `<tr>
-                      <th>${spot}</th>
-                      <td>${room}</td>
+                      <th>${username}</th>
                       <td>${title}</td>
                       <td>${context}</td>
                       <td>${star}</td>
@@ -44,11 +42,11 @@ async function getReviews() {
     alert("불러오는데 실패했습니다!")
   }
 }
-{/* <tr>
+/* <tr>
 <th>제목</th>
 <td>스위트룸</td>
 </tr>
 <tr>
 <th>내용</th>
 <td>스위트룸</td>
-</tr> */}
+</tr> */

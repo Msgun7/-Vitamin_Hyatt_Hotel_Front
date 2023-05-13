@@ -11,10 +11,10 @@ async function RoomviewBySpot() {
     console.log(response_json);
 
 
-    response_json['roomsbyspot'].forEach((a) => {
+    response_json.forEach((a) => {
         const roomname = a["name"];
         const price = a["price"];
-        const star = response_json['avg_star']
+        // const star = response_json['avg_star']
         const image = root_address + a["image"];
         console.log(image)
         console.log(roomname);
@@ -28,7 +28,6 @@ async function RoomviewBySpot() {
                         <div class="metadata">
                             <div class="review-rating">
                                 <span class="cp-stars">
-                                    ★x${star}
                                 </span>
                             </div>
                             <div class="review-author">

@@ -58,10 +58,8 @@ async function changeStatus(id, status) {
         method: 'PATCH',
         body: JSON.stringify({ status }),
     })
-
     const response_json = await response.json()
     console.log(response_json)
     window.location.reload()
 }
-
 roomList()

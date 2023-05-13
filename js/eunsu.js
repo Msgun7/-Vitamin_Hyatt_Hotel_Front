@@ -1,27 +1,27 @@
 console.log('자바스크립트 로딩됨 123')
 
 window.onload = () => {
-    RoomviewBySpot()
+  RoomviewBySpot()
 }
 
 async function RoomviewBySpot() {
 
-    const fetch_url = 'http://127.0.0.1:8000/manager/roomsbyspot/' + '1'
-    const response = await fetch(fetch_url, {
-    });
+  const fetch_url = 'http://127.0.0.1:8000/manager/roomsbyspot/' + '1'
+  const response = await fetch(fetch_url, {
+  });
 
-    const response_json = await response.json();
-    console.log(response_json);
+  const response_json = await response.json();
+  console.log(response_json);
 
 
-    response_json.forEach((a) => {
-        const roomname = a["name"];
-        const price = a["price"];
-        const image = a["image"];
+  response_json.forEach((a) => {
+    const roomname = a["name"];
+    const price = a["price"];
+    const image = a["image"];
 
-        console.log(roomname);
+    console.log(roomname);
 
-        let temp = `<a href="/vitamin_hyatt/review_detail.html">
+    let temp = `<a href="/review_detail.html">
                 <section class="cp-card content">
                     <div class="thumb" style="background-image: url(${image});">
                     </div>
@@ -40,8 +40,8 @@ async function RoomviewBySpot() {
                     </div>
                 </section>
             </a>`;
-        
-            
-        $("#contents_id").append(temp);
-    });
+
+
+    $("#contents_id").append(temp);
+  });
 }

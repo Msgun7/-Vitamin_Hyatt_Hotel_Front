@@ -38,8 +38,6 @@ async function RoomviewBySpot() {
                     </div>
                 </section>
             </a>`;
-
-
         $("#contents_id").append(temp);
     });
 }

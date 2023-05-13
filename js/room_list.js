@@ -1,7 +1,3 @@
-window.onload = () => {
-    roomList()
-}
-
 // 정수 값을 문자열로 변환하는 함수
 function getSpotString(spot) {
     switch (spot) {
@@ -21,11 +17,11 @@ function getSpotString(spot) {
 }
 
 async function roomList() {
+    const accessToken = localStorage.getItem('access')
     const response = await fetch('http://127.0.0.1:8000/manager/rooms/', {
         headers: {
             'content-type': 'application/json',
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MDAyMDYxLCJpYXQiOjE2ODM5NTg4NjEsImp0aSI6ImQ4ZDExZGNkZGU1MTRjOTZiYTk2ZDUzNGI0ZGFlODdmIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhZG1pbkBuYXZlci5jb20iLCJ1c2VybmFtZSI6IiJ9.N0xxMLRSuuFb8twAuqubn0IKpwReV7ogsfnvdxOK-2A`
-
+            'Authorization': `Bearer ${accessToken}`
         },
         method: 'GET',
     })
@@ -67,3 +63,5 @@ async function changeStatus(id, status) {
     console.log(response_json)
     window.location.reload()
 }
+
+roomList()

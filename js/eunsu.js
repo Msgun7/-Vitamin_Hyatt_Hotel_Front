@@ -1,11 +1,5 @@
-console.log('자바스크립트 로딩됨 123')
-
-window.onload = () => {
-    RoomviewBySpot()
-}
-
 async function RoomviewBySpot() {
-
+    const root_address = "http://127.0.0.1:8000";
     const fetch_url = 'http://127.0.0.1:8000/manager/roomsbyspot/' + '1'
     const response = await fetch(fetch_url, {
     });
@@ -17,7 +11,7 @@ async function RoomviewBySpot() {
     response_json.forEach((a) => {
         const roomname = a["name"];
         const price = a["price"];
-        const image = a["image"];
+        const image = root_address + a["image"];
 
         console.log(roomname);
 
@@ -40,8 +34,8 @@ async function RoomviewBySpot() {
                     </div>
                 </section>
             </a>`;
-
-
         $("#contents_id").append(temp);
     });
 }
+
+RoomviewBySpot()

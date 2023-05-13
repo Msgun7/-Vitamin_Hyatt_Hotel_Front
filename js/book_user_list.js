@@ -1,6 +1,6 @@
-window.onload = () => {
-    GetRoom()
-}
+// window.onload = () => {
+
+// }
 
 async function GetRoom() {
     const accessToken = localStorage.getItem('access')
@@ -36,7 +36,7 @@ async function bookUserList() {
 
     const response_json = await response.json()
     console.log(response_json)
-
+    $('#book_info').empty()
     response_json['book_set'].forEach((a) => {
         const num = a['id']
         const check_in = a['check_in']
@@ -56,3 +56,5 @@ async function bookUserList() {
         $('#book_info').append(temp_html)
     })
 }
+
+GetRoom()

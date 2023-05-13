@@ -82,6 +82,7 @@
             </tbody>
           </table>
           <h4 style="margin-top:50px;">예약 내역</h4>
+          <button type="button" id="submitBtn" data-userid="1">전송</button>
           <table style="width: 100%;">
             <thead>
               <tr>
@@ -89,15 +90,10 @@
                 <th>객실 이름</th>
                 <th>체크인</th>
                 <th>체크아웃</th>
+                <th>예약인원</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th>Row Header</th>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-              </tr>
+            <tbody id="mybook_info">
             </tbody>
           </table>
           <h4 style="margin-top:50px;">작성한 리뷰</h4>
@@ -107,17 +103,12 @@
               <tr>
                 <th class="pin">지점</th>
                 <th>객실 이름</th>
-                <th>별점</th>
+                <th>제목</th>
                 <th>내용</th>
+                <th>별점</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th>Row Header</th>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-                <td>Cell Data</td>
-              </tr>
+            <tbody id="myreview_info">
             </tbody>
           </table>
         </div>
@@ -230,47 +221,47 @@
       </div>
     </div>
   </div>
-
   <div class="modal fade" id="room" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            객실 등록</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    객실 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <select id="spot">
+                        <option value=>지점선택</option>
+                        <option value=1>고양점</option>
+                        <option value=2>대구점</option>
+                        <option value=3>세종점</option>
+                        <option value=4>양주점</option>
+                        <option value=5>포항점</option>
+                    </select>
+                    <select id="status">
+                        <option value="">상태</option>
+                        <option value="checkin">check in</option>
+                        <option value="empty">empty</option>
+                    </select>
+                    <input id="name" type="text" class="form-control" placeholder="객실 이름">
+                    <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
+                    <input id="price" type="number" class="form-control" placeholder="가격">
+                    <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
+                    <input id="img" type="file" class="form-control" placeholder="객실 이미지">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+                    </button>
+                    <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
+                        onclick="createRoom()">
+                        등록하기
+                    </button>
+                </div>
+            </form>
         </div>
-        <form action="/" method="post">
-          <div class="modal-body">
-            <select name="spot">
-              <option value="">지점선택</option>
-              <option value="고양점">고양점</option>
-              <option value="대구점">대구점</option>
-              <option value="세종점">세종점</option>
-              <option value="양주점">양주점</option>
-              <option value="포항점">포항점</option>
-            </select>
-            <select name="status">
-              <option value="">상태</option>
-              <option value="checkin">check in</option>
-              <option value="empty">empty</option>
-            </select>
-            <input name="name" type="text" class="form-control" placeholder="객실 이름">
-            <input name="max_memver" type="number" class="form-control" placeholder="최대 인원">
-            <input name="price" type="number" class="form-control" placeholder="가격">
-            <textarea placeholder="description" style="width: 100%;"></textarea>
-            <input name="img" type="file" class="form-control" placeholder="객실 이미지">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-            </button>
-            <button type="submit" class="btn btn-primary" style="float: right">
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
+</div>
   <div class="modal fade" id="review" tabindex="-1" aria-labelledby="su" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -281,8 +272,8 @@
         </div>
         <form>
           <div class="modal-body">
-            <input name="title" id="review-title" type="text" class="form-control" placeholder="제목">
-            <textarea name="content" id="review-content" class="form-control-content" cols="30" rows="10"
+            <input name="title" id="title" type="text" class="form-control" placeholder="제목">
+            <textarea name="content" id="context" class="form-control-content" cols="30" rows="10"
               placeholder="리뷰 작성"></textarea>
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupSelect01">별점</label>

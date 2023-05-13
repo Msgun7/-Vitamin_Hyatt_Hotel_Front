@@ -17,7 +17,7 @@
     <script src="/js/cal.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/loader.js"></script>
-
+    <script src="/js/book_user_list.js"></script>
     <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
 </head>
@@ -25,6 +25,27 @@
 <body>
     <header class="site-header navbar">
         <!-- navbar -->
+        <div class="content max-width">
+            <a href="/index.html">
+                <img class="logo" src="/css/assets/logo.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="/index.html">고양점</a></li>
+                    <!-- <li><a href="">대구점</a></li>
+                    <li><a href="">세종점</a></li>
+                    <li><a href="">양주점</a></li>
+                    <li><a href="">포항점</a></li> -->
+                    <!-- <li><a href="">로그아웃</a></li> -->
+                    <li><a href="/book_user_list.html">예약자 조회</a></li>
+                    <li><a href="/room_list.html">객실 조회</a></li>
+                    <li><a href="" data-bs-toggle="modal" data-bs-target="#room">객실등록</a></li>
+                    <li><a href="/my_page.html">마이페이지</a></li>
+                    <li><a href="" data-bs-toggle="modal" data-bs-target="#login">로그인</a></li>
+                    <li><a href="" data-bs-toggle="modal" data-bs-target="#signup">회원가입</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main class="site-body">
         <article class="review-detail max-content-width">
@@ -36,6 +57,12 @@
                 <select name="객실">
                     <option value="">객실선택</option>
                     <option value="스위트룸">스위트룸</option>
+                    <a class="back-link" href="/index.html">&lt; 목록으로</a>
+            </div>
+            <div class="content" style="display:inline-block; width:100%; margin-left:30px">
+                <h4>예약자 명단</h4>
+                <select name="객실" id="selet_room_category" onchange="bookUserList()">
+                    <option value="-1">객실</option>
                 </select>
                 <table style="width: 100%;">
                     <thead>
@@ -77,6 +104,7 @@
                             placeholder="Password2">
                         <input name="phone" id="phone" type="text" oninput="autoHyphen(this)" class="form-control"
                             placeholder="Phone">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
@@ -89,7 +117,6 @@
             </div>
         </div>
     </div>
-
     <!-- 로그인 모달창 -->
     <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

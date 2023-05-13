@@ -2,6 +2,13 @@
 const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5500"
 
+window.onload = () => {
+    console.log('자바스크립트 불러왔음!')
+}
+
+// 그냥 맨처음에 들어가면 로그인/회원가입 
+
+// 회원가입이 된 유저가 로그인을 하고나면 마이페이지/로그아웃 이렇게 뜨도록
 // 회원가입 --> 잘못입력했을 때 에러메세지 띄우기
 async function handleSignup() {
     const username = document.getElementById("username").value
@@ -9,15 +16,6 @@ async function handleSignup() {
     const password = document.getElementById("password").value
     const password2 = document.getElementById("password2").value
     const phone = document.getElementById("phone").value
-
-    // const autoHyphen = (phone) => {
-    //     return phone.replace(/[^0-9]/g, '')
-    //         .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-    //         .replace(/(\-{1,2})$/g, "");
-    // }
-
-    // const phoneWithHyphen = autoHyphen(phone)
-
     console.log(username, email, password, password2, phone)
 
     const response = await fetch(`${backend_base_url}/users/signup/`, {
@@ -34,6 +32,7 @@ async function handleSignup() {
         })
     })
 
+
     if (response.status == 201) {
         document.getElementById("signup").querySelector('[data-bs-dismiss="modal"]').click();
     }
@@ -41,17 +40,6 @@ async function handleSignup() {
         const response_json = await response.json()
 
         console.log(response_json)
-
-        // const escapedJsonString = response_json.replace(/'/g, '"').replace(/\${(.*?)}/g, '$1').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-        // // const modifiedMessage = response_json.message.replace(/\$|\{|\}/g, '');
-
-        // // alert(modifiedMessage);
-
-        // // error_message = response_json.password[0].string
-        // const json = JSON.parse(escapedJsonString)
-
-        // console.log(json.message.password[0].string)
-
 
         // 조건문분기 - 비밀번호 
         const regex = /string='([^']+)'/;

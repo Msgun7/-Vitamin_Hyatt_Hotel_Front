@@ -605,14 +605,14 @@ ul.navba2 li {
   justify-content: center;
   width: calc(100% / 7);
   text-align: left;
-  color: #999;
+  color: black;
   font-size: 12px;
   text-align: center;
   border-radius: 5px
 }
 
 .current.today {
-  background: rgba(187, 187, 186, 0.584);
+  background: rgba(252, 80, 71, 0.584);
 }
 
 .sec_cal .cal_wrap .dates {

@@ -1,5 +1,4 @@
 window.onload = () => {
-    roomList()
 }
 
 // 정수 값을 문자열로 변환하는 함수
@@ -62,8 +61,8 @@ async function changeStatus(id, status) {
         method: 'PATCH',
         body: JSON.stringify({ status }),
     })
-
     const response_json = await response.json()
     console.log(response_json)
     window.location.reload()
 }
+roomList()

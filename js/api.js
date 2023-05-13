@@ -39,6 +39,7 @@ async function handleSignup() {
         const match = response_json.message(regex);
         console.log(match);
         alert(match)
+
         console.log(response_json)
 
         alert(response_json[ErrorDetail])
@@ -100,7 +101,7 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/vitamin_hyatt/index.html`)
+    window.location.replace(`${frontend_base_url}/index.html`)
     location.reload()
 }
 

@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/loader.js"></script>
     <script src="/js/rooms.js"></script>
     <script src="/js/book_user_list.js"></script>
     <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
@@ -35,12 +37,13 @@
     <main class="site-body">
         <article class="review-detail max-content-width">
             <div class="review-info">
-                <a class="back-link" href="/vitamin_hyatt/index.html">&lt; 목록으로</a>
+                <a class="back-link" href="/index.html">&lt; 목록으로</a>
             </div>
             <div class="content" style="display:inline-block; width:100%; margin-left:30px">
                 <h4>예약자 명단</h4>
                 <select name="객실" id="select_room" onchange="bookUserList()">
                     <option value="">객실선택</option>
+
                 </select>
                 <table style="width: 100%;">
                     <thead>
@@ -155,32 +158,6 @@
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        상태 변경</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <select name="status">
-                        <option value="">상태</option>
-                        <option value="checkin">check in</option>
-                        <option value="empty">empty</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-                    </button>
-                    <button id="submitBtn" type="button" class="btn btn-primary" style="float: right"
-                        onclick="createRoom()">
-                        등록하기
-                    </button>
-                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 window.onload = () => {
-    
+
 }
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {

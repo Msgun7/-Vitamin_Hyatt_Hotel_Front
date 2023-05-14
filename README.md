@@ -61,6 +61,17 @@
 
 **팀 소개** : 상큼한 팀
 
+## 우리 팀 규칙
+
+1. 포기하지 않기
+1. 컴다운(**제일 중요!!!**)
+1. 프로젝트 기능별 나누기
+1. 깃 브랜치 전략 & S.A 작성(와이어프레임(kakao oven), ERD, api 명세) -월요일
+1. 각자 기능 제작( 월요일 시작 ~ 목요일 완성목표 (금요일 마지노선) )
+1. 기능 Pull merge - 저녁 8시 지정
+1. 프론트 제작 (금요일 시작) https://github.com/hanmariyang/off_the_outfit_frontend <<기철 매니저님 프론트엔드 정리
+1. Git ReadME 작성
+
 ---
 
 ### 역할 분담
@@ -108,6 +119,39 @@
 -지점의 위치는 위도 경도를 입력해야함
 
 [ERD 링크](https://www.erdcloud.com/d/XAFNn332mDJ2C2jdr)
+
+## API
+
+### 관리자용 
+
+|관리자 기능|Method|url|request|response|
+|------|---|---|---|---|
+|방 등록|POST|manager/rooms|manager/rooms|'roomname','description','spot','price','max_members'|{’msg’:’등록완료’, HTTP_201_CREATED}validated_data|
+|방 전체 조회|GET|manager/rooms|  |’room_name’, ‘spot’, ‘price’|
+|방 삭제|DELETE|manager/rooms/<int:room_id>|room_id|{’msg’:’삭제완료’, HTTP_204_NO_CONTENT}|
+|방 수정|PUT|manager/rooms/<int:room_id>|id,room_name,description,spot,price,max_members|{’msg’:’수정완료’, HTTP_200_OK}|
+|예약자 명단 조회|GET|manager/customers/<int:room_id>|room_id|{’user’, ’room’, ‘created_at’,’members’}|
+
+
+### 일반 회원용
+
+|기능|Method|url|request|response|
+|------|---|---|---|---|
+|숙소 조회|GET|users/|manager/rooms|ID|name, img, comment, hobby, info(1~4)|
+|숙소 예약|POST|users/|ID, name, img, intro, hobby, info(1~4)|{msg : ”숙소 예약완료”}|
+|예약 취소|PUT|users/|ID, name, img, intro, hobby, info(1~4)|{msg : “예약 취소완료”}|
+|숙소 상세조회 및 리뷰 전체 조회|GET|reviews/room/<int:booked_id>/|ID|roomname, description,spot,price,max_members|
+|로그인|POST|users/login|email, password|{msg : “로그인 완료”, 200 OK}|
+|회원가입|POST|users/signup|email, password, phone-number|{msg : “회원가입 완료”, 201 OK}|
+|리뷰 생성|POST|reviews/room/<int:booked_id>|title, content, star|{msg : “리뷰 생성완료”, 201 OK}|
+|리뷰 상세 조회|GET|reivews/<int:room_id>|ID||
+|리뷰 수정|PUT|reivews/<int:room_id>|ID, title, content, star||
+|리뷰 삭제|DELETE|reivews/<int:room_id>|ID||
+|검색|GET|users/search/<int:search_id>|title, region|roomname,description,spot,price,mex_members|
+|마이페이지 조회|GET|users/search/<int:search_id>|title, region|roomname,description,spot,price,mex_members|
+|회원 탈퇴|DELETE|users/search/<int:search_id>|title, region|roomname,description,spot,price,mex_members|
+|회원정보 수정|PATCH|users/search/<int:search_id>|title, region|roomname,description,spot,price,mex_members|
+
 ---
 
 ## 실행

@@ -1,8 +1,16 @@
 checkLogin()
 
+// 기본 URL
+//const backend_base_url = "http://127.0.0.1:8000"
+// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+//const frontend_base_url = "http://127.0.0.1:5500"
+
+
 async function loadUserprofile() {
 
   const response = await getUserprofile();
+
+  console.log(response)
 
   const username = document.getElementById("username")
   username.innerText = response.profile.username
@@ -21,7 +29,6 @@ async function loadUserprofile() {
 //마이페이지 내 리뷰&예약 내역 조회
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
-  console.log(payload)
 
   const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
@@ -33,7 +40,6 @@ async function getArticles() {
 
   //내 리뷰 조회
   const response_json = await response.json()
-  console.log(response_json)
   $('#myreview_info').empty()
   response_json['reviews'].forEach((a) => {
     const context = a['context']
@@ -47,7 +53,6 @@ async function getArticles() {
                       <th>${spot}</th>
                       <td>${room}</td>
                       <td>${title}</td>
-                      <td>${context}</td>
                       <td>${star}</td>
                       <td><a class="cp-button secondary" type="button" onclick="getDetailReview(${review_id})" data-bs-toggle="modal" data-bs-target="#myreview">상세</a></td>
                   </tr>
@@ -63,27 +68,27 @@ async function getArticles() {
     const check_in = new Date(a['check_in'])
     const check_out = new Date(a['check_out'])
     const book_id = a['id']
-    console.log(a)
-    // 여기도 추가할 부분있음
+
     let temp_html = `<tr>
-                        <th>${spot}</th>
-                        <td>${room}</td>
-                        <td>${check_in.toLocaleDateString()}</td>
-                        <td>${check_out.toLocaleDateString()}</td>
-                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id}); savedBookId(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                        style="width: 120px; font-size:15px" >예약상세</a></td>
-                    </tr>`
+                    <th>${spot}</th>
+                    <td>${room}</td>
+                    <td>${check_in.toLocaleDateString()}</td>
+                    <td>${check_out.toLocaleDateString()}</td>
+                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                    style="width: 120px; font-size:15px" >예약상세</a></td>
+                  </tr>
+  `
+
 
     let mybook_temp_html = `<tr>
-                              <th>${spot}</th>
-                              <td>${room}</td>
-                              <td>${check_in.toLocaleDateString()}</td>
-                              <td>${check_out.toLocaleDateString()}</td>
-                              <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                              style="width: 120px; font-size:15px" >예약 상세</a></td>
-                              <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
-                              style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
-                            </tr>`
+                                        <th>${spot}</th>
+                                        <td>${room}</td>
+                                        <td>${check_in.toLocaleDateString()}</td>
+                                        <td>${check_out.toLocaleDateString()}</td>
+                                        <td><a class="cp-button secondary" type="button" onclick="createReview(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                                        style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                                    </tr>
+                    `
     if (check_out < today) {
       $('#mybook_info').append(mybook_temp_html)
     } else if (check_in <= today && today <= check_out) {
@@ -93,13 +98,13 @@ async function getArticles() {
       $('#current_book_info').append(temp_html)
     }
   })
-
 }
 
 loadUserprofile();
 getArticles();
 
 async function getDetailBook(book_id) {
+
   const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
@@ -136,7 +141,6 @@ async function getDetailBook(book_id) {
   }
 }
 
-
 async function createReview(book_id) {
   document.getElementById('reviewsavediv');
   $('#reviewsavediv').empty();
@@ -148,25 +152,9 @@ async function createReview(book_id) {
               Save
             </button>
     `
-
   $('#reviewsavediv').append(temp_html);
 }
 
-// 여기 추가
-var savedBookId;
-function savedBookId(book_id) {
-  savedRoomId = book_id;
-  document.getElementById('reservationdeletediv');
-  $('#reservationdeletediv').empty();
-  let temp_html = `
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
-                  </button>
-                  <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete(${book_id})">
-                    예약취소
-                  </button>
-    `
-  $('#reservationdeletediv').append(temp_html);
-}
 
 //예약한 숙소 리뷰 작성
 async function handleReviewCreate(book_id) {
@@ -182,19 +170,17 @@ async function handleReviewCreate(book_id) {
   };
 
   const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
-
     headers: {
-      "Authorization": `Bearer ${token}`
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("access")
     },
-    method: 'DELETE',
-  })
-  if (response.status == 204) {
-    alert("예약 취소가 정상적으로 처리되었습니다!")
-    location.reload()
-  } else {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
 
-  }
-
+  const response_json = await response.json();
+  console.log(response_json);
+  createReview(book_id);
 }
 
 

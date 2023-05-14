@@ -1,6 +1,6 @@
 async function getReviews() {
-  // params = new URLSearchParams(window.location.search);
-  // room_id = params.get("room_id");
+  params = new URLSearchParams(window.location.search);
+  room_id = params.get("room_id");
   console.log(room_id)
   const response = await fetch(`http://127.0.0.1:8000/reviews/room/${room_id}/`, {
 
@@ -83,9 +83,9 @@ async function handleCreateReservation(roomid) {
     body: JSON.stringify(data)
   });
 
+  const response_json = await response.json()
 
   if (response.status == 201) {
-    const response_json = await response.json()
     alert("예약 완료!")
     window.location.reload()
 

@@ -32,8 +32,7 @@ async function getArticles() {
   //내 리뷰 조회
   const response_json = await response.json()
   $('#myreview_info').empty()
-  console.log(response_json)
-
+  // console.log(response_json)
   response_json['reviews'].forEach((a) => {
     const context = a['context']
     const room = a['room']
@@ -66,7 +65,7 @@ async function getArticles() {
                         <td>${room}</td>
                         <td>${check_in.toLocaleDateString()}</td>
                         <td>${check_out.toLocaleDateString()}</td>
-                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id}); savedBookId(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                         style="width: 120px; font-size:15px" >예약상세</a></td>
                     </tr>`
 
@@ -88,14 +87,15 @@ async function getArticles() {
       $('#current_book_info').append(temp_html)
     }
   })
+
 }
 
 loadUserprofile();
 getArticles();
 
-
 async function getDetailBook(book_id) {
   console.log("디테일 북")
+  console.log(book_id);
 
   const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
@@ -134,30 +134,58 @@ async function getDetailBook(book_id) {
   }
 }
 
-async function handleReviewCreate(book_id) {
+console.log('2');
+console.log(book_id);
 
-  const title = document.getElementById('title').value;
-  const context = document.getElementById('context').value;
-  const star = parseInt(document.getElementById('star').value);
-  console.log(title, context, star);
-  console.log(book_id)
-  const data = {
-    "title": title,
-    "context": context,
-    "star": star
-  };
+async function createReview(book_id) {
+  document.getElementById('reviewsavediv');
+  $('#reviewsavediv').empty();
+  let temp_html = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" id="myreview-save" class="btn btn-primary" data-bs-dismiss="modal" style="float: right"
+              onclick="handleReviewCreate(${book_id})">
+              Save
+            </button>
+    `
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  $('#reviewsavediv').append(temp_html);
+}
+
+var savedBookId;
+function savedBookId(book_id) {
+  savedRoomId = book_id;
+  document.getElementById('reservationdeletediv');
+  console.log(book_id);
+
+  $('#reservationdeletediv').empty();
+  let temp_html = `
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
+                  </button>
+                  <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete(${book_id})">
+                    예약취소
+                  </button>
+    `
+  $('#reservationdeletediv').append(temp_html);
+}
+
+async function handleReservationDelete(book_id) {
+  let token = localStorage.getItem("access")
+  console.log(book_id);
+
+  const response = await fetch(`${backend_base_url}/manager/rooms/book/${book_id}/`, {
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem("access")
+      "Authorization": `Bearer ${token}`
     },
-    method: 'POST',
-    body: JSON.stringify(data)
-  });
+    method: 'DELETE',
+  })
+  if (response.status == 204) {
+    alert("예약 취소가 정상적으로 처리되었습니다!")
+    location.reload()
+  } else {
 
-  const response_json = await response.json();
-  console.log(response_json);
+  }
+
 }
 
 

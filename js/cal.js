@@ -1,8 +1,13 @@
+// 기본 URL
+const backend_base_url = "http://127.0.0.1:8000"
+// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
+
 $(document).ready(function () {
   calendarInit();
   console.log("하이하이")
   async function calendarInit() {
-    const response = await fetch(`http://127.0.0.1:8000/manager/cal/1/`, {
+    const response = await fetch(`${backend_base_url}/manager/cal/1/`, {
       headers: {
         'content-type': 'application/json',
       },

@@ -8,7 +8,7 @@
 
 ## 소개 
 
----
+
 
 가상의 호텔 Vitamin Hyatt Hotel을 관리하고 이용하기위한 목적을 가진 페이지입니다.
 
@@ -18,7 +18,7 @@
 
 ## 기능
 
----
+
 
 기본적으로 로그인 기능을 가지고 있습니다. 
 
@@ -39,7 +39,7 @@
 
 ## 실행
 
----
+
 
 기본적으로 url을 통해 접속하면 되지만 
 
@@ -56,7 +56,7 @@ $ python manage.py runserver
 
 ---
 ## Contributors
----
+
 
 <a href ='https://github.com/MSgun7'><img src="https://github.com/MSgun7.png" alt="프로필 이미지" width="100" height="100" style="margin-right: 10px;"></a>
 <a href ='https://github.com/kmy9810'><img src="https://github.com/kmy9810.png" alt="프로필 이미지" width="100" height="100" style="margin-right: 10px;"></a>

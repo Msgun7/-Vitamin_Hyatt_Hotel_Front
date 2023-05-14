@@ -30,7 +30,6 @@ async function RoomviewBySpot() {
                         <div class="metadata">
                             <div class="review-rating">
                                 <span class="cp-stars">
-                                    ★x${star}
                                 </span>
                             </div>
                             <div class="review-author">

@@ -172,6 +172,7 @@
       </div>
     </div>
   </div>
+  <!-- 예약하기 모달창 -->
   <div class="modal fade" id="book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -182,17 +183,17 @@
         </div>
         <form action="/" method="post">
           <div class="modal-body">
-            <input name="name" type="text" class="form-control" placeholder="예약자">
-            <input name="phone" type="text" class="form-control" placeholder="전화번호">
-            <input name="member" type="number" class="form-control" placeholder="인원">
-            <input name="check_in" type="date" class="form-control" placeholder="체크인">
-            <input name="check_out" type="date" class="form-control" placeholder="체크아웃">
+            <input name="name" id="bookuser" type="text" class="form-control" placeholder="예약자">
+            <input name="phone" id="booknumber" type="text" class="form-control" placeholder="전화번호">
+            <input name="member" id="bookmember" type="number" class="form-control" placeholder="인원">
+            <input name="check_in" id="check_in" type="date" class="form-control" placeholder="체크인">
+            <input name="check_out" id="check_out" type="date" class="form-control" placeholder="체크아웃">
           </div>
-          <div class="modal-footer">
+          <div id="reservationsavediv" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
             </button>
-            <button type="submit" class="btn btn-primary" style="float: right">
-              결제하기
+            <button type="button" class="btn btn-primary" style="float: right">
+              예약하기
             </button>
           </div>
         </form>

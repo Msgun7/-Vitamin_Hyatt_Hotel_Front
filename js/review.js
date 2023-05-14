@@ -5,7 +5,7 @@ async function getReviews() {
   room_id = params.get('room_id')
   console.log(room_id)
 
-  const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -14,7 +14,7 @@ async function getReviews() {
   });
   //해당 숙소 리뷰 조회
   const response_json = await response.json()
-  $('#roomreview_info').empty()
+  $('#detailroom-info').empty()
   console.log(response_json)
   const name = response_json['name']
   const description = response_json['description']
@@ -26,7 +26,7 @@ async function getReviews() {
                       <p class="content">설명 : ${description}</p>
                       <p class="content">가격 : ${price}</p>
                       <p class="content">인원 : ${max_members}</p>`
-  $('#roomreview_info').append(temp_html)
+  $('#detailroom-info').append(temp_html)
 
 
   $('#roomreview_info-info').empty()

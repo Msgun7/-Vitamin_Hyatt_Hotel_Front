@@ -18,10 +18,11 @@ async function loadUserprofile() {
 
 }
 
+//마이페이지 내 리뷰&예약 내역 조회
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
 
-  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -32,13 +33,13 @@ async function getArticles() {
   //내 리뷰 조회
   const response_json = await response.json()
   $('#myreview_info').empty()
-  // console.log(response_json)
   response_json['reviews'].forEach((a) => {
     const context = a['context']
     const room = a['room']
     const title = a['title']
     const spot = a['spot']
     const star = a['stars']
+    const review_id = a['id']
 
     let temp_html = `<tr>
                       <th>${spot}</th>
@@ -46,18 +47,19 @@ async function getArticles() {
                       <td>${title}</td>
                       <td>${context}</td>
                       <td>${star}</td>
-                  </tr>`
+                      <td><a class="cp-button secondary" type="button" onclick="getDetailReview(${review_id})" data-bs-toggle="modal" data-bs-target="#myreview">상세</a></td>
+                  </tr>
+`
     $('#myreview_info').append(temp_html)
   })
 
   const today = new Date()
-
+  //내 예약 조회
   response_json['books'].forEach((a) => {
     const spot = a['spot']
     const room = a['room']
     const check_in = new Date(a['check_in'])
     const check_out = new Date(a['check_out'])
-    const members = a['members']
     const book_id = a['id']
 
     // 여기도 추가할 부분있음
@@ -84,6 +86,7 @@ async function getArticles() {
       $('#mybook_info').append(mybook_temp_html)
     } else if (check_in <= today && today <= check_out) {
       $('#current_book_info').append(temp_html)
+
     } else {
       $('#current_book_info').append(temp_html)
     }
@@ -95,10 +98,7 @@ loadUserprofile();
 getArticles();
 
 async function getDetailBook(book_id) {
-  console.log("디테일 북")
-  console.log(book_id);
-
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -108,7 +108,6 @@ async function getDetailBook(book_id) {
   //해당 숙소 예약 조회
   const response_json = await response.json()
   $('#myreservation-info').empty()
-  console.log(response_json)
   const user = response_json['user']
   const room = response_json['room']
   const spot = response_json['spot']
@@ -159,7 +158,6 @@ function savedBookId(book_id) {
   savedRoomId = book_id;
   document.getElementById('reservationdeletediv');
   console.log(book_id);
-
   $('#reservationdeletediv').empty();
   let temp_html = `
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
@@ -171,11 +169,21 @@ function savedBookId(book_id) {
   $('#reservationdeletediv').append(temp_html);
 }
 
-async function handleReservationDelete(book_id) {
-  let token = localStorage.getItem("access")
-  console.log(book_id);
+//예약한 숙소 리뷰 작성
+async function handleReviewCreate(book_id) {
 
-  const response = await fetch(`${backend_base_url}/manager/rooms/book/${book_id}/`, {
+  const title = document.getElementById('title').value;
+  const context = document.getElementById('context').value;
+  const stars = parseInt(document.getElementById('stars').value);
+
+  const data = {
+    "title": title,
+    "context": context,
+    "stars": stars
+  };
+
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
+
     headers: {
       "Authorization": `Bearer ${token}`
     },
@@ -191,3 +199,41 @@ async function handleReservationDelete(book_id) {
 }
 
 
+//내 리뷰 상세 조회 
+async function getDetailReview(review_id) {
+
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/Detail/${review_id}/`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("access")
+    },
+    method: 'GET',
+  });
+  //해당 숙소 예약 조회
+  const response_json = await response.json()
+  $('#myreview-info').empty()
+  const user = response_json['user']
+  const room = response_json['room']
+  const spot = response_json['spot']
+  const title = response_json['title']
+  const context = response_json['context']
+  const stars = response_json['stars']
+  let temp_html = `
+                      <p class="content">이메일 : ${user}</p>
+                      <p class="content">지점 : ${spot}</p>
+                      <p class="content">객실 : ${room}</p>
+                      <p class="content">제목 : ${title}</p>
+                      <p class="content">내용 : ${context}</p>
+                      <p class="content">별점 : ${stars}</p>
+                      <div class="modal-footer">`
+
+  $('#myreview-info').append(temp_html)
+
+
+  if (response.status == 200) {
+    const response_json = await response.json()
+    return response_json
+  } else {
+    alert("불러오는데 실패했습니다!")
+  }
+}

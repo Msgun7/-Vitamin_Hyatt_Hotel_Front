@@ -24,7 +24,7 @@ async function createRoom() {
     console.log(formData);
 
 
-    response = await fetch(`${backend_base_url}/manager/rooms/`, {
+    response = await fetch(`http://127.0.0.1:8000/manager/rooms/`, {
         method: 'POST',
         body: formData
     })

@@ -10,7 +10,7 @@ async function handleSignup() {
     const phone = document.getElementById("phone").value
     console.log(username, email, password, password2, phone)
 
-    const response = await fetch(`${backend_base_url}/users/signup/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/signup/`, {
         headers: {
             'content-type': 'application/json',
         },
@@ -50,7 +50,7 @@ async function handleSignin() {
     const email = document.getElementById("login-email").value
     const password = document.getElementById("login-password").value
 
-    const response = await fetch(`${backend_base_url}/users/login/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/login/`, {
         headers: {
             'content-type': 'application/json',
         },
@@ -90,7 +90,7 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/index.html`)
+    window.location.replace(`http://127.0.0.1:5500/index.html`)
 }
 
 // 마이페이지 유저프로필 - 유저아이디 불러오기
@@ -99,7 +99,7 @@ async function getUserprofile() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
 
-    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload_parse.user_id}/`, {
         headers: {
             "Authorization": `Bearer ${token}`
         },
@@ -134,7 +134,7 @@ async function updateUserprofile() {
         bodyData.phone = phone;
     }
 
-    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload_parse.user_id}/`, {
         headers: {
             "Authorization": `Bearer ${token}`,
             'content-type': 'application/json',
@@ -173,7 +173,7 @@ async function handlesUserDelete() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
 
-    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload_parse.user_id}/`, {
         headers: {
             "Authorization": `Bearer ${token}`
         },
@@ -190,17 +190,33 @@ async function handlesUserDelete() {
 function checkLogin() {
     const payload = localStorage.getItem("payload");
     if (!payload) {
-        window.location.replace(`${frontend_base_url}/index.html`)
+        window.location.replace(`http://127.0.0.1:5500/index.html`)
     }
 }
 
 // 관리자계정인지 판단
-function checkAdmin() {
+async function checkAdmin() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.is_admin)
 
-    if (payload_parse.is_admin === false) {
-        window.location.replace(`${frontend_base_url}/index.html`)
+    if (payload === null) {
+        window.location.replace(`http://127.0.0.1:5500/index.html`)
+    } else {
+        const accessToken = localStorage.getItem('access')
+        const user_id = payload_parse['user_id']
+        const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${user_id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            method: 'GET',
+        })
+        let admin = await response.json()
+        if (admin['is_admin']) {
+            is_admin = admin['is_admin']
+            return true
+        } else {
+            window.location.replace(`http://127.0.0.1:5500/index.html`)
+        }
     }
 }

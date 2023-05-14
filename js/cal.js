@@ -1,8 +1,10 @@
+const urlParams = new URL(location.href).searchParams;
+const room_id = urlParams.get('room_id');
+
 $(document).ready(function () {
   calendarInit();
-  console.log("하이하이")
   async function calendarInit() {
-    const response = await fetch(`${backend_base_url}/manager/cal/1/`, {
+    const response = await fetch(`http://127.0.0.1:8000/manager/cal/${room_id}/`, {
       headers: {
         'content-type': 'application/json',
       },

@@ -54,7 +54,7 @@ async function adminUser() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
     const user_id = payload_parse['user_id']
-    const response = await fetch(`${backend_base_url}/users/mypagelist/${user_id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${user_id}/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`,

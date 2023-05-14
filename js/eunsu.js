@@ -1,13 +1,17 @@
 async function RoomviewBySpot(event) {
-    var spotId = event.target.id.slice(-1);
-    const root_address = `${backend_base_url}`; // 여기에 자신의 루트 주소를 입력하세요
-    const fetch_url = `${backend_base_url}/manager/roomsbyspot/` + spotId;
+    var spotId = 1; // 기본 값으로 고양점 선택
+    if (event && event.target) {
+        spotId = event.target.id.slice(-1);
+    }
+
+    const root_address = `http://127.0.0.1:8000`;
+    const fetch_url = `http://127.0.0.1:8000/manager/roomsbyspot/` + spotId;
     const response = await fetch(fetch_url, {});
     var targetDiv = document.getElementById('contents_id');
 
     var dropdown = document.getElementById("navbarDropdown");
-    targetDiv.innerHTML = ''
-    dropdown.textContent = event.target.textContent
+    targetDiv.innerHTML = '';
+    dropdown.textContent = event ? event.target.textContent : '고양점'; // 이 부분을 수정합니다.
 
     const response_json = await response.json();
 
@@ -42,9 +46,9 @@ async function RoomviewBySpot(event) {
                         </div>
                     </div>
                 </section>
-            </a>`;
-        $("#contents_id").append(temp);
-    });
+              </a > `;
+    $("#contents_id").append(temp);
+  });
 }
 
-
+RoomviewBySpot();

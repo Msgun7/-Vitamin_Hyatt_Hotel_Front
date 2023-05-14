@@ -1,6 +1,10 @@
+checkLogin()
+
 async function loadUserprofile() {
 
   const response = await getUserprofile();
+
+  console.log(response)
 
   const username = document.getElementById("username")
   username.innerText = response.profile.username
@@ -15,12 +19,15 @@ async function loadUserprofile() {
   point.innerText = `${response.profile.point} p`
 
 }
+
 window.onload = async function () {
   console.log("온로드");
-  // await loadUserprofile();
+  await loadUserprofile();
   await getArticles();
 };
 
+
+console.log(response)
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("테스테테슽")
@@ -135,3 +142,5 @@ async function handleReviewCreate() {
   const response_json = await response.json();
   console.log(response_json);
 }
+
+

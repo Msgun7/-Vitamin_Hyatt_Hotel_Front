@@ -94,9 +94,7 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    window.location.href = `${frontend_base_url}/index.html`;
-    // window.location.replace(`${frontend_base_url}/index.html`)
-    // location.reload()
+    window.location.replace(`${frontend_base_url}/index.html`)
 }
 
 // 마이페이지 유저프로필 - 유저아이디 불러오기
@@ -149,13 +147,12 @@ async function updateUserprofile() {
         body: JSON.stringify(bodyData)
     })
     console.log(response)
-    console.log("2")
 
     if (response.status == 200) {
         alert("회원정보가 변경되었습니다!")
         location.reload()
     }
-    if (response.status === 400) {
+    else if (response.status === 400) {
         const response_json = await response.json();
 
         if (response_json.phone) {
@@ -193,3 +190,9 @@ async function handlesUserDelete() {
     window.location.replace(`${frontend_base_url}/index.html`)
 }
 
+function checkLogin() {
+    const payload = localStorage.getItem("payload");
+    if (!payload) {
+        window.location.replace(`${frontend_base_url}/index.html`)
+    }
+}

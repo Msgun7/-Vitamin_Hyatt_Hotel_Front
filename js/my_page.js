@@ -1,9 +1,8 @@
 checkLogin()
 
 // 기본 URL
-//const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
-// 로컬 URL
 const backend_base_url = "http://127.0.0.1:8000"
+// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
 const frontend_base_url = "http://127.0.0.1:5500"
 
 
@@ -78,7 +77,10 @@ async function getArticles() {
                     <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                     style="width: 120px; font-size:15px" >예약상세</a></td>
                   </tr>
-                  `
+  `
+    $('#mybook_info').append(temp_html)
+    return book_id
+
 
     let mybook_temp_html = `<tr>
                                         <th>${spot}</th>
@@ -104,9 +106,8 @@ async function getArticles() {
 loadUserprofile();
 getArticles();
 
-
 async function getDetailBook(book_id) {
-  console.log("디테일 북")
+  // console.log("디테일 북")
 
   const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
@@ -145,17 +146,33 @@ async function getDetailBook(book_id) {
   }
 }
 
+async function createReview(book_id) {
+  document.getElementById('reviewsavediv');
+  $('#reviewsavediv').empty();
+  let temp_html = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" id="myreview-save" class="btn btn-primary" data-bs-dismiss="modal" style="float: right"
+              onclick="handleReviewCreate(${book_id})">
+              Save
+            </button>
+    `
+
+  $('#reviewsavediv').append(temp_html);
+}
+
+
 async function handleReviewCreate(book_id) {
 
   const title = document.getElementById('title').value;
   const context = document.getElementById('context').value;
-  const star = parseInt(document.getElementById('star').value);
-  console.log(title, context, star);
+  const stars = parseInt(document.getElementById('stars').value);
+  console.log(title, context, stars);
   console.log(book_id)
   const data = {
     "title": title,
     "context": context,
-    "star": star
+    "stars": stars
   };
 
   const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
@@ -169,6 +186,7 @@ async function handleReviewCreate(book_id) {
 
   const response_json = await response.json();
   console.log(response_json);
+  createReview(book_id);
 }
 
 

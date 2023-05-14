@@ -1,5 +1,7 @@
-window.onload = () => {
-}
+// 기본 URL
+const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
+
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {
     const name = document.getElementById("name").value;
@@ -26,7 +28,7 @@ async function createRoom() {
     console.log(formData);
 
 
-    response = await fetch('http://127.0.0.1:8000/manager/rooms/', {
+    response = await fetch(`${backend_base_url}/manager/rooms/`, {
         method: 'POST',
         body: formData
     })

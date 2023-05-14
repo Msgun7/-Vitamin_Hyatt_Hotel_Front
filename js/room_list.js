@@ -1,5 +1,10 @@
 checkAdmin()
 
+// 기본 URL
+const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
+
+
 // 정수 값을 문자열로 변환하는 함수
 function getSpotString(spot) {
     switch (spot) {
@@ -20,7 +25,7 @@ function getSpotString(spot) {
 
 async function roomList() {
     const accessToken = localStorage.getItem('access')
-    const response = await fetch('http://127.0.0.1:8000/manager/rooms/', {
+    const response = await fetch(`${backend_base_url}/manager/rooms/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
@@ -70,7 +75,7 @@ async function roomList() {
 // 객실상태 변경 버튼을 클릭했을시 patch로 데이터 베이스의 값을 바꿀 수 있도록 하였습니다.
 async function changeStatus(id, status) {
     const accessToken = localStorage.getItem('access')
-    const response = await fetch(`http://127.0.0.1:8000/manager/rooms/${id}/`, {
+    const response = await fetch(`${backend_base_url}/manager/rooms/${id}/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`

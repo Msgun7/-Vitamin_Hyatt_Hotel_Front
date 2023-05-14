@@ -1,3 +1,7 @@
+// 기본 URL
+const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
+
 async function injectNavbar() {
     fetch("/navbar.html").then(response => {
         return response.text()
@@ -54,7 +58,7 @@ async function adminUser() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
     const user_id = payload_parse['user_id']
-    const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${user_id}/`, {
+    const response = await fetch(`${backend_base_url}/users/mypagelist/${user_id}/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`,

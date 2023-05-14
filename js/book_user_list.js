@@ -1,11 +1,11 @@
 checkAdmin()
-// window.onload = () => {
-
-// }
+// 기본 URL
+const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
 
 async function GetRoom() {
     const accessToken = localStorage.getItem('access')
-    const response = await fetch(`http://127.0.0.1:8000/manager/rooms/`, {
+    const response = await fetch(`${backend_base_url}/manager/rooms/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`,
@@ -27,7 +27,7 @@ async function GetRoom() {
 async function bookUserList() {
     const accessToken = localStorage.getItem('access')
     const room_id = document.getElementById("select_room").value
-    const response = await fetch(`http://127.0.0.1:8000/manager/customers/${room_id}/`, {
+    const response = await fetch(`${backend_base_url}/manager/customers/${room_id}/`, {
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`,

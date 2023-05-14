@@ -1,4 +1,5 @@
 
+
 async function RoomviewBySpot(event) {
   var spotId = event.target.id.slice(-1);
   const root_address = "http://127.0.0.1:8000"; // 여기에 자신의 루트 주소를 입력하세요
@@ -12,6 +13,7 @@ async function RoomviewBySpot(event) {
 
   const response_json = await response.json();
 
+
   response_json.forEach((a) => {
     const roomname = a["name"];
     const price = a["price"];
@@ -22,6 +24,10 @@ async function RoomviewBySpot(event) {
     }
     const image = root_address + a["image"];
     let temp = `<a href="/review_detail.html">
+    const roomid = a["id"]
+
+    // 변수 하나를 0으로 해서 count ++ 
+    let temp = `<a href="/review_detail.html?room_id=${roomid}">
                 <section class="cp-card content">
                     <div class="thumb" style="background-image: url(${image});">
                     </div>

@@ -1,3 +1,4 @@
+checkAdmin()
 // window.onload = () => {
 
 // }

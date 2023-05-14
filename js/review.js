@@ -1,19 +1,11 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   const submitBtn = document.getElementById("submitBtn");
-//   submitBtn.addEventListener("click", getReviews);
-// })
 
 async function getReviews() {
   console.log("테스트")
   params = new URLSearchParams(window.location.search)
   room_id = params.get('room_id')
   console.log(room_id)
-  // const room_id = event.target.dataset.userid;
-  // const data = {
-  //   "room_id": room_id
-  // };
-  // console.log(data)
-  const response = await fetch(`${backend_base_url}users/myreservation/1/`, {
+
+  const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -36,6 +28,22 @@ async function getReviews() {
                       <p class="content">인원 : ${max_members}</p>`
   $('#detailroom-info').append(temp_html)
 
+
+  $('#roomreview_info-info').empty()
+  response_json['review_set'].forEach((a) => {
+    const user = a['user']
+    const title = a['title']
+    const context = a['context']
+    const stars = a['stars']
+    let temp_html = `<tr>
+                      <th>${user}</th>
+                      <td>${title}</td>
+                      <td>${context}</td>
+                      <td>${stars}</td>
+                  </tr>
+  `
+    $('#roomreview_info').append(temp_html)
+  })
 
   if (response.status == 200) {
     const response_json = await response.json()

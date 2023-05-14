@@ -19,7 +19,7 @@ async function loadUserprofile() {
 
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
-  console.log(payload)
+  // console.log(payload)
 
   const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
     headers: {
@@ -31,7 +31,7 @@ async function getArticles() {
   //내 리뷰 조회
   const response_json = await response.json()
   $('#myreview_info').empty()
-  console.log(response_json)
+  // console.log(response_json)
   response_json['reviews'].forEach((a) => {
     const context = a['context']
     const room = a['room']
@@ -50,7 +50,7 @@ async function getArticles() {
   })
   //내 예약 조회 
   $('#mybook_info').empty()
-  console.log(response_json)
+  // console.log(response_json)
   response_json['books'].forEach((a) => {
     const spot = a['spot']
     const room = a['room']
@@ -66,12 +66,12 @@ async function getArticles() {
                       <td>${check_out}</td>
                       <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                       style="width: 120px; font-size:15px" >예약 상세보기</a></td>
-                      <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                      <td><a class="cp-button secondary" type="button" data-bs-toggle="modal" data-bs-target="#review"
                       style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
                   </tr>
   `
     $('#mybook_info').append(temp_html)
-
+    return book_id
   })
 
   if (response.status == 200) {
@@ -85,9 +85,8 @@ async function getArticles() {
 loadUserprofile();
 getArticles();
 
-
 async function getDetailBook(book_id) {
-  console.log("디테일 북")
+  // console.log("디테일 북")
 
   const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {

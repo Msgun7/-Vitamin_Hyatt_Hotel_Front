@@ -52,9 +52,9 @@ async function RoomviewBySpot(event) {
                         </div>
                     </div>
                 </section>
-            </a>`;
-        $("#contents_id").append(temp);
-    });
+              </a > `;
+    $("#contents_id").append(temp);
+  });
 }
 
 RoomviewBySpot();

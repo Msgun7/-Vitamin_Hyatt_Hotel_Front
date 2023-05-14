@@ -1,9 +1,9 @@
 checkLogin()
 
 // 기본 URL
-const backend_base_url = "http://127.0.0.1:8000"
+//const backend_base_url = "http://127.0.0.1:8000"
 // const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
-const frontend_base_url = "http://127.0.0.1:5500"
+//const frontend_base_url = "http://127.0.0.1:5500"
 
 
 async function loadUserprofile() {
@@ -30,7 +30,7 @@ async function loadUserprofile() {
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
 
-  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -108,7 +108,7 @@ getArticles();
 
 async function getDetailBook(book_id) {
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -173,7 +173,7 @@ async function handleReviewCreate(book_id) {
     "stars": stars
   };
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -191,7 +191,7 @@ async function handleReviewCreate(book_id) {
 //내 리뷰 상세 조회 
 async function getDetailReview(review_id) {
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/Detail/${review_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/Detail/${review_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

@@ -98,7 +98,7 @@
 컨셉 : 호텔 브랜드 예약 사이트
 이유 : 백오피스와 유저가 사용하는 플렛폼을 동시에 구현하기에 적절할 것 같아서 입니다!
 
-[링크](https://ovenapp.io/view/BBWK0bIBH6Gvn2wfO3Lx2L9VwS7NketT/M5h9Q)**
+[와이어프레임 링크](https://ovenapp.io/view/BBWK0bIBH6Gvn2wfO3Lx2L9VwS7NketT/M5h9Q)
 
 ## ERD 
 
@@ -107,7 +107,7 @@
 -예약 리뷰는 원 투 원
 -지점의 위치는 위도 경도를 입력해야함
 
-
+[ERD 링크](https://www.erdcloud.com/d/XAFNn332mDJ2C2jdr)
 ---
 
 ## 실행

@@ -21,7 +21,7 @@ async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
   // console.log(payload)
 
-  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -66,7 +66,7 @@ async function getArticles() {
                       <td>${check_out}</td>
                       <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                       style="width: 120px; font-size:15px" >예약 상세보기</a></td>
-                      <td><a class="cp-button secondary" type="button" data-bs-toggle="modal" data-bs-target="#review"
+                      <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
                       style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
                   </tr>
   `
@@ -88,7 +88,7 @@ getArticles();
 async function getDetailBook(book_id) {
   // console.log("디테일 북")
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -138,7 +138,7 @@ async function handleReviewCreate(book_id) {
     "star": star
   };
 
-  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

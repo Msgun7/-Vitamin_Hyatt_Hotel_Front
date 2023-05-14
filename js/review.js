@@ -13,7 +13,7 @@ async function getReviews() {
   //   "room_id": room_id
   // };
   // console.log(data)
-  const response = await fetch(`${backend_base_url}users/myreservation/1/`, {
+  const response = await fetch(`${backend_base_url}/users/myreservation/1/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

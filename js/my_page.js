@@ -52,9 +52,8 @@ async function getArticles() {
                   </tr>`
     $('#myreview_info').append(temp_html)
   })
-  //내 예약 조회 
-  $('#mybook_info').empty()
-  // console.log(response_json)
+
+  const today = new Date()
 
   response_json['books'].forEach((a) => {
     const spot = a['spot']
@@ -72,19 +71,37 @@ async function getArticles() {
                     <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                     style="width: 120px; font-size:15px" >예약상세</a></td>
                   </tr>
-  `
-    $('#mybook_info').append(temp_html)
-    return book_id
+                  `
+
+    let mybook_temp_html = `<tr>
+                                        <th>${spot}</th>
+                                        <td>${room}</td>
+                                        <td>${check_in.toLocaleDateString()}</td>
+                                        <td>${check_out.toLocaleDateString()}</td>
+                                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                                        style="width: 120px; font-size:15px" >예약 상세</a></td>
+                                        <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                                        style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                                    </tr>
+                    `
+    if (check_out < today) {
+      $('#mybook_info').append(mybook_temp_html)
+    } else if (check_in <= today && today <= check_out) {
+      $('#current_book_info').append(temp_html)
+    } else {
+      $('#current_book_info').append(temp_html)
+    }
   })
 }
 
 loadUserprofile();
 getArticles();
 
-async function getDetailBook(book_id) {
-  // console.log("디테일 북")
 
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
+async function getDetailBook(book_id) {
+  console.log("디테일 북")
+
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -134,7 +151,7 @@ async function handleReviewCreate(book_id) {
     "star": star
   };
 
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

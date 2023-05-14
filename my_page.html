@@ -22,7 +22,7 @@
   <script src="/js/api.js"></script>
   <script src="/js/loader.js"></script>
   <script src="/js/my_page.js"></script>
-  <script src="/js/review.js"></script>
+  <!-- <script src="/js/review.js"></script> -->
 
   <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
   <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
@@ -88,7 +88,6 @@
                 <th>객실 이름</th>
                 <th>체크인</th>
                 <th>체크아웃</th>
-                <th>예약인원</th>
                 <th>후기</th>
               </tr>
             </thead>
@@ -251,21 +250,14 @@
           <h5 class="modal-title" id="exampleModalLabel">
             예약 내역</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>book
+        </div>
         <form>
           <div class="modal-body" id="myreservation-info">
-            <h6 id="book-username">Name : 김미영</h6>
-            <h6 id="book-email">Email : kmy9810@naver.com</h6>
-            <h6 id="book-point">Point : 100p</h6>
-            <input name="phone" type="text" class="form-control" placeholder="phone" id="book-phone">
-            <input name="password" type="password" class="form-control" placeholder="Password" id="book-password">
           </div>
           <div id="reservationdeletediv" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
             </button>
-            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete()">
-              예약취소
-            </button>
+
           </div>
         </form>
       </div>

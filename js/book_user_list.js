@@ -33,7 +33,6 @@ async function bookUserList() {
   })
 
   const response_json = await response.json()
-  console.log(response_json)
   $('#book_info').empty()
   let num = 1
   response_json['book_set'].forEach((a) => {

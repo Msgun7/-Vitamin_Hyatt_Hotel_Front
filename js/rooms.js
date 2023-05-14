@@ -8,8 +8,6 @@ async function createRoom() {
     const description = document.getElementById("description").value;
     const img = document.getElementById("img");
 
-    console.log(img.files[0]);
-
 
     const formData = new FormData();
     formData.append("name", name,);
@@ -21,9 +19,6 @@ async function createRoom() {
     formData.append("image", img.files[0]);
 
 
-    console.log(formData);
-
-
     response = await fetch(`http://127.0.0.1:8000/manager/rooms/`, {
         method: 'POST',
         body: formData
@@ -32,8 +27,6 @@ async function createRoom() {
         .then(response => response.json())
 
         .then(data => {
-            console.log("errors message")
-            console.log(typeof data)
             const nameError = data.name[0] || null;
             const maxMembersError = data.max_members[0] || null;
             const descriptionError = data.description[0] || null;
@@ -51,7 +44,6 @@ async function createRoom() {
 
 
         .catch(error => {
-            console.log(error);
             alert("에러가 발생했습니다.");
         });
 }

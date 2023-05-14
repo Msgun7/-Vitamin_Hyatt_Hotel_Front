@@ -1,5 +1,3 @@
-const urlParams = new URL(location.href).searchParams;
-const room_id = urlParams.get('room_id');
 
 $(document).ready(function () {
   calendarInit();
@@ -12,7 +10,6 @@ $(document).ready(function () {
     })
 
     const response_json = await response.json()
-    console.log(response_json)
     // 날짜 정보 가져오기
     var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
     var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
@@ -28,7 +25,6 @@ $(document).ready(function () {
     var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
 
     // kst 기준 현재시간
-    // console.log(thisMonth);
 
     // 캘린더 렌더링
     renderCalender(thisMonth);
@@ -86,7 +82,6 @@ $(document).ready(function () {
         let check_out_month = check_out.getMonth()
         let check_out_day = check_out.getDate()
 
-        console.log(check_in, check_out)
         // 예약한 날짜에 해당하는 달에만 보여줌
         if (check_in_month === thisMonth.getMonth() || check_out_month === thisMonth.getMonth()) {
           if (check_in_year === thisMonth.getFullYear()) {

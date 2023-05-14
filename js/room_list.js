@@ -28,16 +28,15 @@ async function roomList() {
     method: 'GET',
   })
 
-    const response_json = await response.json()
-    console.log(response_json)
+  const response_json = await response.json()
 
-    response_json.forEach((a) => {
-        const spot = getSpotString(a['spot']) // 문자열로 변환된 지점 정보
-        const name = a['name']
-        const price = a['price']
-        const max_members = a['max_members']
-        const status = a['status']
-        const room_id = a['id']
+  response_json.forEach((a) => {
+    const spot = getSpotString(a['spot']) // 문자열로 변환된 지점 정보
+    const name = a['name']
+    const price = a['price']
+    const max_members = a['max_members']
+    const status = a['status']
+    const room_id = a['id']
 
 
     if (status == 'empty') {
@@ -86,28 +85,26 @@ async function changeStatus(id, status) {
     body: JSON.stringify({ status }),
   })
   const response_json = await response.json()
-  // console.log(response_json)
   window.location.reload()
 }
 roomList()
 
 // 객실삭제
 async function handleRoomDelete(room_id) {
-    let token = localStorage.getItem("access")
-    console.log(room_id);
+  let token = localStorage.getItem("access")
 
-    const response = await fetch(`${backend_base_url}/manager/rooms/${room_id}/`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        method: 'DELETE',
-    })
-    if (response.status == 204) {
-        alert("객실 삭제가 정상적으로 처리되었습니다!")
-        location.reload()
-    } else {
+  const response = await fetch(`${backend_base_url}/manager/rooms/${room_id}/`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    method: 'DELETE',
+  })
+  if (response.status == 204) {
+    alert("객실 삭제가 정상적으로 처리되었습니다!")
+    location.reload()
+  } else {
 
-    }
+  }
 
 }
 

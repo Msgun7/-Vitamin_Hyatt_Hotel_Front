@@ -8,7 +8,6 @@ async function handleSignup() {
     const password = document.getElementById("password").value
     const password2 = document.getElementById("password2").value
     const phone = document.getElementById("phone").value
-    console.log(username, email, password, password2, phone)
 
     const response = await fetch(`http://127.0.0.1:8000/users/signup/`, {
         headers: {
@@ -34,7 +33,6 @@ async function handleSignup() {
 
         const regex = /string='([^']+)'/;
         const match = JSON.stringify(response_json).match(regex)
-        console.log(match)
 
         if (match && match.length > 1) {
             const cleanedString = match[1].replace("string=", "");
@@ -64,7 +62,6 @@ async function handleSignin() {
     if (response.status == 200) {
         const response_json = await response.json()
 
-        console.log(response_json)
 
         // localstorage에 저장하기
         localStorage.setItem('refresh', response_json.refresh)
@@ -120,8 +117,6 @@ async function updateUserprofile() {
     let token = localStorage.getItem("access")
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.email)
-    console.log("1")
 
     const password = document.getElementById('newpassword').value;
     const phone = document.getElementById('newphone').value;
@@ -142,7 +137,6 @@ async function updateUserprofile() {
         method: 'PUT',
         body: JSON.stringify(bodyData)
     })
-    console.log(response)
 
     if (response.status == 200) {
         alert("회원정보가 변경되었습니다!")

@@ -16,7 +16,6 @@ async function injectNavbar() {
 
     adminUser().then(is_admin => {
         // Promise가 성공적으로 처리되면 is_admin 값 사용
-        console.log(is_admin);
         if (payload) {
             if (is_admin == true) {
                 const adminBookUserList = document.getElementById("adminBookUserList")

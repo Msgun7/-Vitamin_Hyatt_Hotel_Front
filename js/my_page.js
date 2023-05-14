@@ -21,6 +21,7 @@ async function loadUserprofile() {
 //마이페이지 내 리뷰&예약 내역 조회
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
+  console.log(payload)
 
   const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
@@ -32,6 +33,7 @@ async function getArticles() {
 
   //내 리뷰 조회
   const response_json = await response.json()
+  console.log(response_json)
   $('#myreview_info').empty()
   response_json['reviews'].forEach((a) => {
     const context = a['context']
@@ -61,7 +63,7 @@ async function getArticles() {
     const check_in = new Date(a['check_in'])
     const check_out = new Date(a['check_out'])
     const book_id = a['id']
-
+    console.log(a)
     // 여기도 추가할 부분있음
     let temp_html = `<tr>
                         <th>${spot}</th>
@@ -134,8 +136,6 @@ async function getDetailBook(book_id) {
   }
 }
 
-console.log('2');
-console.log(book_id);
 
 async function createReview(book_id) {
   document.getElementById('reviewsavediv');
@@ -157,7 +157,6 @@ var savedBookId;
 function savedBookId(book_id) {
   savedRoomId = book_id;
   document.getElementById('reservationdeletediv');
-  console.log(book_id);
   $('#reservationdeletediv').empty();
   let temp_html = `
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기

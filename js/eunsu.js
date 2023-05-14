@@ -1,6 +1,8 @@
 // 기본 URL
-const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5500"
+// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+// const frontend_base_url = "http://127.0.0.1:5500"
 
 async function RoomviewBySpot(event) {
     var spotId = event.target.id.slice(-1);
@@ -28,7 +30,7 @@ async function RoomviewBySpot(event) {
         const roomid = a["id"]
 
         // 변수 하나를 0으로 해서 count ++ 
-        let temp = `< a href = "/review_detail.html?room_id=${roomid}" >
+        let temp = `<a href = "/review_detail.html?room_id=${roomid}" >
                 <section class="cp-card content">
                     <div class="thumb" style="background-image: url(${image});">
                     </div>
@@ -46,7 +48,7 @@ async function RoomviewBySpot(event) {
                         </div>
                     </div>
                 </section>
-              </a > `;
+            </a>`;
         $("#contents_id").append(temp);
     });
 }

@@ -112,6 +112,7 @@ async function getUserprofile() {
 
     if (response.status == 200) {
         const response_json = await response.json()
+        console.log("성공")
         return response_json
     } else {
         alert("불러오는데 실패했습니다")
@@ -190,9 +191,21 @@ async function handlesUserDelete() {
     window.location.replace(`${frontend_base_url}/index.html`)
 }
 
+// 로그인 여부 체크
 function checkLogin() {
     const payload = localStorage.getItem("payload");
     if (!payload) {
+        window.location.replace(`${frontend_base_url}/index.html`)
+    }
+}
+
+// 관리자계정인지 판단
+function checkAdmin() {
+    const payload = localStorage.getItem("payload");
+    const payload_parse = JSON.parse(payload)
+    console.log(payload_parse.is_admin)
+
+    if (payload_parse.is_admin === false) {
         window.location.replace(`${frontend_base_url}/index.html`)
     }
 }

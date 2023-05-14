@@ -20,12 +20,8 @@ async function loadUserprofile() {
 
 }
 
-window.onload = async function () {
-  console.log("온로드");
-  await loadUserprofile();
-  await getArticles();
-};
-
+loadUserprofile();
+getArticles();
 
 console.log(response)
 

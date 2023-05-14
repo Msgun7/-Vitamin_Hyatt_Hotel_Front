@@ -13,7 +13,6 @@ async function getReviews() {
   //해당 숙소 리뷰 조회
   const response_json = await response.json()
   $('#detailroom-info').empty()
-  console.log(response_json)
   const name = response_json['name']
   const description = response_json['description']
   const price = response_json['price']
@@ -44,12 +43,12 @@ async function getReviews() {
     $('#roomreview_info').append(temp_html)
   })
 
-  // if (response.status == 200) {
-  //   const response_json = await response.json()
-  //   return response_json
-  // } else {
-  //   alert("불러오는데 실패했습니다!")
-  // }
+  if (response.status == 200) {
+    const response_json = await response.json()
+    return response_json
+  } else {
+    alert("불러오는데 실패했습니다!")
+  }
 }
 
 getReviews();
@@ -63,7 +62,7 @@ function saveRoomId(roomid) {
   let temp_html = `
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
             </button>
-            <button type="button" class="btn btn-primary" style="float: right" onclick="handleCreateReservation(${roomid})">
+            <button type="button" class="btn btn-primary" style="float: right" onclick="handleCreateReservation(${roomid})" data-bs-dismiss="modal">
               예약하기
             </button>
     `
@@ -78,8 +77,7 @@ async function handleCreateReservation(roomid) {
   const bookmember = parseInt(document.getElementById('bookmember').value);
   const check_in = document.getElementById('check_in').value;
   const check_out = document.getElementById('check_out').value;
-  console.log(bookuser, booknumber, bookmember, check_in, check_out);
-  console.log(roomid, "확인")
+
   const data = {
     "bookuser": bookuser,
     "booknumber": booknumber,
@@ -97,25 +95,14 @@ async function handleCreateReservation(roomid) {
     body: JSON.stringify(data)
   });
 
-  const response_json = await response.json();
-  console.log(response_json);
+
+  if (response.status == 201) {
+    const response_json = await response.json()
+    alert("예약 완료!")
+    return response_json
+  } else {
+    alert("이미 예약된 날짜입니다. 다른 날짜로 예약해주세요!")
+  }
+
 }
 
-
-async function handlesReservationDelete() {
-  let token = localStorage.getItem("access")
-  const payload = localStorage.getItem("payload");
-  const payload_parse = JSON.parse(payload)
-
-  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
-    headers: {
-      "Authorization": `Bearer ${token}`
-    },
-    method: 'DELETE',
-  })
-
-  localStorage.removeItem("access")
-  localStorage.removeItem("refresh")
-  localStorage.removeItem("payload")
-  window.location.replace(`${frontend_base_url}/index.html`)
-}

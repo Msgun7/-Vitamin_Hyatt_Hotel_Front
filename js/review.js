@@ -14,7 +14,7 @@ async function getReviews() {
   });
   //해당 숙소 리뷰 조회
   const response_json = await response.json()
-  $('#detailroom-info').empty()
+  $('#roomreview_info').empty()
   console.log(response_json)
   const name = response_json['name']
   const description = response_json['description']
@@ -26,7 +26,7 @@ async function getReviews() {
                       <p class="content">설명 : ${description}</p>
                       <p class="content">가격 : ${price}</p>
                       <p class="content">인원 : ${max_members}</p>`
-  $('#detailroom-info').append(temp_html)
+  $('#roomreview_info').append(temp_html)
 
 
   $('#roomreview_info-info').empty()

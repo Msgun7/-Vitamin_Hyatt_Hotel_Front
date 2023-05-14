@@ -22,9 +22,9 @@ async function loadUserprofile() {
 
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
-  console.log(payload)
+  // console.log(payload)
 
-  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -35,7 +35,7 @@ async function getArticles() {
   //내 리뷰 조회
   const response_json = await response.json()
   $('#myreview_info').empty()
-  console.log(response_json)
+  // console.log(response_json)
   response_json['reviews'].forEach((a) => {
     const context = a['context']
     const room = a['room']

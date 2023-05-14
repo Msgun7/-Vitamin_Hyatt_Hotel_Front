@@ -79,7 +79,7 @@ async function changeStatus(id, status) {
         body: JSON.stringify({ status }),
     })
     const response_json = await response.json()
-    console.log(response_json)
+    // console.log(response_json)
     window.location.reload()
 }
 roomList()

@@ -4,8 +4,6 @@ async function loadUserprofile() {
 
   const response = await getUserprofile();
 
-  console.log(response)
-
   const username = document.getElementById("username")
   username.innerText = response.profile.username
 
@@ -22,7 +20,6 @@ async function loadUserprofile() {
 
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
-  console.log(payload)
 
   const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
     headers: {
@@ -36,6 +33,7 @@ async function getArticles() {
   const response_json = await response.json()
   $('#myreview_info').empty()
   console.log(response_json)
+
   response_json['reviews'].forEach((a) => {
     const context = a['context']
     const room = a['room']
@@ -64,26 +62,24 @@ async function getArticles() {
     const book_id = a['id']
 
     let temp_html = `<tr>
-                    <th>${spot}</th>
-                    <td>${room}</td>
-                    <td>${check_in.toLocaleDateString()}</td>
-                    <td>${check_out.toLocaleDateString()}</td>
-                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                    style="width: 120px; font-size:15px" >예약상세</a></td>
-                  </tr>
-                  `
+                        <th>${spot}</th>
+                        <td>${room}</td>
+                        <td>${check_in.toLocaleDateString()}</td>
+                        <td>${check_out.toLocaleDateString()}</td>
+                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                        style="width: 120px; font-size:15px" >예약상세</a></td>
+                    </tr>`
 
     let mybook_temp_html = `<tr>
-                                        <th>${spot}</th>
-                                        <td>${room}</td>
-                                        <td>${check_in.toLocaleDateString()}</td>
-                                        <td>${check_out.toLocaleDateString()}</td>
-                                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                                        style="width: 120px; font-size:15px" >예약 상세</a></td>
-                                        <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
-                                        style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
-                                    </tr>
-                    `
+                              <th>${spot}</th>
+                              <td>${room}</td>
+                              <td>${check_in.toLocaleDateString()}</td>
+                              <td>${check_out.toLocaleDateString()}</td>
+                              <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                              style="width: 120px; font-size:15px" >예약 상세</a></td>
+                              <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                              style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                            </tr>`
     if (check_out < today) {
       $('#mybook_info').append(mybook_temp_html)
     } else if (check_in <= today && today <= check_out) {

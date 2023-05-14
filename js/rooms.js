@@ -40,18 +40,14 @@ async function createRoom() {
             const descriptionError = data.description[0] || null;
             const priceError = data.price[0] || null;
 
-            if (nameError || maxMembersError || descriptionError || priceError) {
-                const errorMessage = `Name Error: ${nameError || null}\nMax Members Error: ${maxMembersError || null}\nDescription Error: ${descriptionError || null}\nPrice Error: ${priceError || null}\n`;
+            if (nameError && maxMembersError && descriptionError && priceError) {
+                const errorMessage = `Name Error: ${nameError}\nMax Members Error: ${maxMembersError}\nDescription Error: ${descriptionError}\nPrice Error: ${priceError}\n`;
                 alert(errorMessage);
             }
-            else (nameError && maxMembersError && descriptionError && priceError); {
+            else {
                 alert("객실이 등록되었습니다.");
                 window.location.reload();
             }
-            // const errorMessage = `Name Error: ${nameError}\nMax Members Error: ${maxMembersError}Description Error: ${descriptionError}\nPrice Error: ${priceError}\n`;
-            // alert(errorMessage);
-
-            // alert("객실이 등록되었습니다.");
         })
 
 
@@ -60,14 +56,3 @@ async function createRoom() {
             alert("에러가 발생했습니다.");
         });
 }
-
-        //     const nameError = data.name[0] || null;
-        //     const maxMembersError = data.max_members[0] || null;
-        //     const descriptionError = data.description[0] || null;
-        //     const priceError = data.price[0] || null;
-        //     const errorMessage = `Name Error: ${nameError}\nMax Members Error: ${maxMembersError}Description Error: ${descriptionError}\nPrice Error: ${priceError}\n`;
-        //     alert(errorMessage);
-
-
-        //     alert("객실이 등록되었습니다.");
-        // })

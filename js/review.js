@@ -2,7 +2,7 @@
 async function getReviews() {
   params = new URLSearchParams(window.location.search)
   room_id = params.get('room_id')
-
+  
   const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',

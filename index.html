@@ -148,7 +148,7 @@
                         객실 등록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form enctype="multipart/form-data">
+                <form id="myForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         <select id="spot">
                             <option value=>지점선택</option>
@@ -167,7 +167,8 @@
                         <input id="max_members" type="number" class="form-control" placeholder="최대 인원">
                         <input id="price" type="number" class="form-control" placeholder="가격">
                         <textarea id="description" placeholder="description" style="width: 100%;"></textarea>
-                        <input id="img" type="file" accept="image/*" multiple>
+                        <input id="img" name="files" multiple accept=".jpg, .png, .jpeg" type="file"
+                            class="form-control" placeholder="객실 이미지">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기

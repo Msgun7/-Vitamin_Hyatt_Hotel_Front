@@ -1,5 +1,4 @@
 window.onload = () => {
-
 }
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {
@@ -26,11 +25,35 @@ async function createRoom() {
 
     console.log(formData);
 
+
     response = await fetch('http://127.0.0.1:8000/manager/rooms/', {
         method: 'POST',
         body: formData
     })
+
         .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error));
+
+        .then(data => {
+            console.log("errors message")
+            console.log(typeof data)
+            const nameError = data.name[0] || null;
+            const maxMembersError = data.max_members[0] || null;
+            const descriptionError = data.description[0] || null;
+            const priceError = data.price[0] || null;
+
+            if (nameError && maxMembersError && descriptionError && priceError) {
+                const errorMessage = `Name Error: ${nameError}\nMax Members Error: ${maxMembersError}\nDescription Error: ${descriptionError}\nPrice Error: ${priceError}\n`;
+                alert(errorMessage);
+            }
+            else {
+                alert("객실이 등록되었습니다.");
+                window.location.reload();
+            }
+        })
+
+
+        .catch(error => {
+            console.log(error);
+            alert("에러가 발생했습니다.");
+        });
 }

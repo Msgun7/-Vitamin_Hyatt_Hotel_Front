@@ -1,5 +1,3 @@
-
-
 async function injectNavbar() {
     fetch("/navbar.html").then(response => {
         return response.text()

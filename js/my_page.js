@@ -50,13 +50,12 @@ async function getArticles() {
   })
   //내 예약 조회 
   $('#mybook_info').empty()
-  // console.log(response_json)
+  console.log(response_json)
   response_json['books'].forEach((a) => {
     const spot = a['spot']
     const room = a['room']
     const check_in = a['check_in']
     const check_out = a['check_out']
-    const members = a['members']
     const book_id = a['id'];
 
     let temp_html = `<tr>
@@ -125,17 +124,33 @@ async function getDetailBook(book_id) {
   }
 }
 
+async function createReview(book_id) {
+  document.getElementById('reviewsavediv');
+  $('#reviewsavediv').empty();
+  let temp_html = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+            </button>
+            <button type="button" id="myreview-save" class="btn btn-primary" data-bs-dismiss="modal" style="float: right"
+              onclick="handleReviewCreate(${book_id})">
+              Save
+            </button>
+    `
+
+  $('#reviewsavediv').append(temp_html);
+}
+
+
 async function handleReviewCreate(book_id) {
 
   const title = document.getElementById('title').value;
   const context = document.getElementById('context').value;
-  const star = parseInt(document.getElementById('star').value);
-  console.log(title, context, star);
+  const stars = parseInt(document.getElementById('stars').value);
+  console.log(title, context, stars);
   console.log(book_id)
   const data = {
     "title": title,
     "context": context,
-    "star": star
+    "stars": stars
   };
 
   const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
@@ -149,4 +164,5 @@ async function handleReviewCreate(book_id) {
 
   const response_json = await response.json();
   console.log(response_json);
+  createReview(book_id);
 }

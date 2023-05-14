@@ -1,25 +1,31 @@
-console.log('자바스크립트 로딩됨 123')
 
 
-async function RoomviewBySpot() {
+async function RoomviewBySpot(event) {
+  var spotId = event.target.id.slice(-1);
   const root_address = "http://127.0.0.1:8000"; // 여기에 자신의 루트 주소를 입력하세요
-  const fetch_url = 'http://127.0.0.1:8000/manager/roomsbyspot/' + '1'
-  const response = await fetch(fetch_url, {
-  });
+  const fetch_url = "http://127.0.0.1:8000/manager/roomsbyspot/" + spotId;
+  const response = await fetch(fetch_url, {});
+  var targetDiv = document.getElementById('contents_id');
+  
+  var dropdown = document.getElementById("navbarDropdown");
+  targetDiv.innerHTML = ''
+  dropdown.textContent = event.target.textContent
 
   const response_json = await response.json();
-  console.log(response_json);
 
 
   response_json.forEach((a) => {
     const roomname = a["name"];
     const price = a["price"];
-    const star = response_json['avg_star']
+    var star = a['avg_star']
+    var starval = "★ x" + star;
+    if (star == 0) {
+        var starval = "아직 별점이 없음";
+    }
     const image = root_address + a["image"];
+    let temp = `<a href="/review_detail.html">
     const roomid = a["id"]
-    console.log(image)
-    console.log(roomname);
-    console.log(roomid)
+
     // 변수 하나를 0으로 해서 count ++ 
     let temp = `<a href="/review_detail.html?room_id=${roomid}">
                 <section class="cp-card content">
@@ -30,6 +36,7 @@ async function RoomviewBySpot() {
                         <div class="metadata">
                             <div class="review-rating">
                                 <span class="cp-stars">
+                                    ${starval}
                                 </span>
                             </div>
                             <div class="review-author">
@@ -44,4 +51,4 @@ async function RoomviewBySpot() {
 }
 
 
-RoomviewBySpot();
+

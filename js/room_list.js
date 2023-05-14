@@ -1,3 +1,5 @@
+checkAdmin()
+
 // 정수 값을 문자열로 변환하는 함수
 function getSpotString(spot) {
     switch (spot) {

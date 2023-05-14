@@ -20,11 +20,6 @@ async function loadUserprofile() {
 
 }
 
-loadUserprofile();
-getArticles();
-
-console.log(response)
-
 async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
   console.log(payload)
@@ -36,6 +31,7 @@ async function getArticles() {
     },
     method: 'GET',
   });
+
   //내 리뷰 조회
   const response_json = await response.json()
   $('#myreview_info').empty()
@@ -56,38 +52,46 @@ async function getArticles() {
                   </tr>`
     $('#myreview_info').append(temp_html)
   })
-  //내 예약 조회 
-  $('#mybook_info').empty()
-  console.log(response_json)
+
+  const today = new Date()
+
   response_json['books'].forEach((a) => {
     const spot = a['spot']
     const room = a['room']
-    const check_in = a['check_in']
-    const check_out = a['check_out']
+    const check_in = new Date(a['check_in'])
+    const check_out = new Date(a['check_out'])
     const members = a['members']
-    const book_id = a['id'];
+    const book_id = a['id']
 
     let temp_html = `<tr>
-                      <th>${spot}</th>
-                      <td>${room}</td>
-                      <td>${check_in}</td>
-                      <td>${check_out}</td>
-                      <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                      style="width: 120px; font-size:15px" >예약 상세보기</a></td>
-                      <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
-                      style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                    <th>${spot}</th>
+                    <td>${room}</td>
+                    <td>${check_in.toLocaleDateString()}</td>
+                    <td>${check_out.toLocaleDateString()}</td>
+                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                    style="width: 120px; font-size:15px" >예약상세</a></td>
                   </tr>
-  `
-    $('#mybook_info').append(temp_html)
+                  `
 
+    let mybook_temp_html = `<tr>
+                                        <th>${spot}</th>
+                                        <td>${room}</td>
+                                        <td>${check_in.toLocaleDateString()}</td>
+                                        <td>${check_out.toLocaleDateString()}</td>
+                                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                                        style="width: 120px; font-size:15px" >예약 상세</a></td>
+                                        <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                                        style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                                    </tr>
+                    `
+    if (check_out < today) {
+      $('#mybook_info').append(mybook_temp_html)
+    } else if (check_in <= today && today <= check_out) {
+      $('#current_book_info').append(temp_html)
+    } else {
+      $('#current_book_info').append(temp_html)
+    }
   })
-
-  if (response.status == 200) {
-    const response_json = await response.json()
-    return response_json
-  } else {
-    alert("불러오는데 실패했습니다!")
-  }
 }
 
 loadUserprofile();

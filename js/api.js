@@ -196,12 +196,28 @@ function checkLogin() {
 }
 
 // 관리자계정인지 판단
-function checkAdmin() {
+async function checkAdmin() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.is_admin)
 
-    if (payload_parse.is_admin === false) {
+    if (payload === null) {
         window.location.replace(`http://127.0.0.1:5500/index.html`)
+    } else {
+        const accessToken = localStorage.getItem('access')
+        const user_id = payload_parse['user_id']
+        const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${user_id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            method: 'GET',
+        })
+        let admin = await response.json()
+        if (admin['is_admin']) {
+            is_admin = admin['is_admin']
+            return true
+        } else {
+            window.location.replace(`http://127.0.0.1:5500/index.html`)
+        }
     }
 }

@@ -17,17 +17,7 @@ async function loadUserprofile() {
 }
 
 
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("테스테테슽")
-  const submitBtn = document.getElementById("submitBtn");
-  submitBtn.addEventListener("click", reviewtest);
-})
-
 async function getArticles() {
-  console.log("겟 테스트")
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
   console.log(payload)
 
@@ -69,17 +59,17 @@ async function getArticles() {
     const members = a['members']
     const book_id = a['id'];
 
-    console.log(book_id);
-
-
     let temp_html = `<tr>
                       <th>${spot}</th>
                       <td>${room}</td>
                       <td>${check_in}</td>
                       <td>${check_out}</td>
-                      <td>${members}</td>
-                      <td><button>상세</button></td>
-                  </tr>`
+                      <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                      style="width: 120px; font-size:15px" >예약 상세보기</a></td>
+                      <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                      style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
+                  </tr>
+  `
     $('#mybook_info').append(temp_html)
 
   })
@@ -92,40 +82,64 @@ async function getArticles() {
   }
 }
 
-async function reviewtest(event) {
-  console.log("테스트")
-  const booked_id = event.target.dataset.userid;
-  const data = {
-    "booked_id": booked_id
-  };
-  console.log(booked_id)
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${booked_id}/`, {
+loadUserprofile();
+getArticles();
+
+
+async function getDetailBook(book_id) {
+  console.log("디테일 북")
+
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
     },
-    method: 'POST',
-    body: JSON.stringify(data)
+    method: 'GET',
   });
+  //해당 숙소 예약 조회
+  const response_json = await response.json()
+  $('#myreservation-info').empty()
+  console.log(response_json)
+  const user = response_json['user']
+  const room = response_json['room']
+  const spot = response_json['spot']
+  const check_in = response_json['check_in']
+  const check_out = response_json['check_out']
+  const members = response_json['members']
+  const booked_id = response_json['id']
+  let temp_html = `
+                      <p class="content">이메일 : ${user}</p>
+                      <p class="content">지점 : ${spot}</p>
+                      <p class="content">객실 : ${room}</p>
+                      <p class="content">check_in : ${check_in}</p>
+                      <p class="content">check_out : ${check_out}</p>
+                      <p class="content">인원 : ${members}</p>
+                      `
+  $('#myreservation-info').append(temp_html)
 
-  const response_json = await response.json();
-  console.log(response_json);
+
+  if (response.status == 200) {
+    const response_json = await response.json()
+    return response_json
+  } else {
+    alert("불러오는데 실패했습니다!")
+  }
 }
 
-async function handleReviewCreate() {
+async function handleReviewCreate(book_id) {
 
   const title = document.getElementById('title').value;
   const context = document.getElementById('context').value;
   const star = parseInt(document.getElementById('star').value);
   console.log(title, context, star);
-
+  console.log(book_id)
   const data = {
     "title": title,
     "context": context,
     "star": star
   };
 
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${booked_id}/`, {
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -137,7 +151,3 @@ async function handleReviewCreate() {
   const response_json = await response.json();
   console.log(response_json);
 }
-
-
-loadUserprofile();
-getArticles();

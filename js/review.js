@@ -3,7 +3,7 @@
 //   submitBtn.addEventListener("click", getReviews);
 // })
 
-async function getReviews(event) {
+async function getReviews() {
   console.log("테스트")
   params = new URLSearchParams(window.location.search)
   room_id = params.get('room_id')
@@ -13,7 +13,7 @@ async function getReviews(event) {
   //   "room_id": room_id
   // };
   // console.log(data)
-  const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
+  const response = await fetch(`${backend_base_url}users/myreservation/1/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -22,22 +22,6 @@ async function getReviews(event) {
   });
   //해당 숙소 리뷰 조회
   const response_json = await response.json()
-  $('#roomreview_info').empty()
-  response_json['review_set'].forEach((a) => {
-    const username = a['user']
-    const title = a['title']
-    const context = a['context']
-    const star = a['stars']
-
-    let temp_html = `<tr>
-                      <th>${username}</th>
-                      <td>${title}</td>
-                      <td>${context}</td>
-                      <td>${star}</td>
-                  </tr>`
-    $('#roomreview_info').append(temp_html)
-  })
-
   $('#detailroom-info').empty()
   console.log(response_json)
   const name = response_json['name']

@@ -95,7 +95,6 @@
             </tbody>
           </table>
           <h4 style="margin-top:50px;">작성한 리뷰</h4>
-          <a href="" data-bs-toggle="modal" data-bs-target="#review">후기 남기기</a>
           <table style="width: 100%;">
             <thead>
               <tr>
@@ -288,7 +287,8 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
             </button>
-            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReviewCreate()">
+            <button type="button" id="myreview-save" class="btn btn-primary" style="float: right"
+              onclick="handleReviewCreate_save()">
               Save
             </button>
           </div>
@@ -297,21 +297,21 @@
     </div>
   </div>
   <!-- 예약 상세 조회 모달창 -->
-  <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mybook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Profile</h5>
+            예약 내역</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form>
-          <div class="modal-body">
-            <h6 id="change-username">Name : 김미영</h6>
-            <h6 id="change-email">Email : kmy9810@naver.com</h6>
-            <h6 id="change-point">Point : 100p</h6>
-            <input name="phone" type="text" class="form-control" placeholder="phone" id="change-phone">
-            <input name="password" type="password" class="form-control" placeholder="Password" id="change-password">
+          <div class="modal-body" id="myreservation-info">
+            <h6 id="book-username">Name : 김미영</h6>
+            <h6 id="book-email">Email : kmy9810@naver.com</h6>
+            <h6 id="book-point">Point : 100p</h6>
+            <input name="phone" type="text" class="form-control" placeholder="phone" id="book-phone">
+            <input name="password" type="password" class="form-control" placeholder="Password" id="book-password">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
@@ -324,6 +324,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>

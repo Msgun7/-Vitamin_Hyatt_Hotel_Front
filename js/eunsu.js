@@ -1,6 +1,6 @@
 // 기본 URL
-const backend_base_url = "http://127.0.0.1:8000"
-const frontend_base_url = "http://127.0.0.1:5500"
+// const backend_base_url = "http://127.0.0.1:8000"
+// const frontend_base_url = "http://127.0.0.1:5500"
 // const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
 // const frontend_base_url = "http://127.0.0.1:5500"
 
@@ -10,8 +10,8 @@ async function RoomviewBySpot(event) {
         spotId = event.target.id.slice(-1);
     }
 
-    const root_address = `${backend_base_url}`;
-    const fetch_url = `${backend_base_url}/manager/roomsbyspot/` + spotId;
+    const root_address = `http://127.0.0.1:8000`;
+    const fetch_url = `http://127.0.0.1:8000/manager/roomsbyspot/` + spotId;
     const response = await fetch(fetch_url, {});
     var targetDiv = document.getElementById('contents_id');
 

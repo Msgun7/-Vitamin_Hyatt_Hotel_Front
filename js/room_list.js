@@ -1,11 +1,5 @@
 checkAdmin()
 
-// 기본 URL
-const backend_base_url = "http://127.0.0.1:8000"
-// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
-const frontend_base_url = "http://127.0.0.1:5500"
-
-
 // 정수 값을 문자열로 변환하는 함수
 function getSpotString(spot) {
     switch (spot) {
@@ -35,6 +29,7 @@ async function roomList() {
     })
 
     const response_json = await response.json()
+    console.log(response_json)
 
     response_json.forEach((a) => {
         const spot = getSpotString(a['spot']) // 문자열로 변환된 지점 정보
@@ -42,6 +37,7 @@ async function roomList() {
         const price = a['price']
         const max_members = a['max_members']
         const status = a['status']
+        const room_id = a['id']
 
         if (status == 'empty') {
             let temp_html = `<tr>
@@ -53,6 +49,8 @@ async function roomList() {
             <td style='color:blue;'>${status}</td>
             <td><button class="btn btn-secondary"
             onclick="changeStatus(${a.id}, '${status === 'empty' ? 'checkin' : 'empty'}')">객실상태 변경</button></td>
+            <td><button class="btn btn-danger"
+            onclick="handleRoomDelete(${room_id})">삭제하기</button></td>
         </tr>`
             $('#room_info').append(temp_html)
 
@@ -66,6 +64,8 @@ async function roomList() {
             <td style='color:red;'>${status}</td>
             <td><button class="btn btn-secondary"
             onclick="changeStatus(${a.id}, '${status === 'empty' ? 'checkin' : 'empty'}')">객실상태 변경</button></td>
+            <td><button class="btn btn-danger"
+            onclick="handleRoomDelete(${room_id})">삭제하기</button></td>
         </tr>`
             $('#room_info').append(temp_html2)
         }
@@ -89,3 +89,23 @@ async function changeStatus(id, status) {
     window.location.reload()
 }
 roomList()
+
+// 객실삭제
+async function handleRoomDelete(room_id) {
+    let token = localStorage.getItem("access")
+    console.log(room_id);
+
+    const response = await fetch(`${backend_base_url}/manager/rooms/${room_id}/`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        method: 'DELETE',
+    })
+    if (response.status == 204) {
+        alert("객실 삭제가 정상적으로 처리되었습니다!")
+        location.reload()
+    } else {
+
+    }
+
+}

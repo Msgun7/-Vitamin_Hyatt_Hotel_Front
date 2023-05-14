@@ -53,7 +53,6 @@ async function getReviews() {
 
 getReviews();
 
-
 var savedRoomId;
 function saveRoomId(roomid) {
   savedRoomId = roomid;
@@ -68,7 +67,6 @@ function saveRoomId(roomid) {
     `
   $('#reservationsavediv').append(temp_html);
 }
-
 
 async function handleCreateReservation(roomid) {
 
@@ -97,7 +95,5 @@ async function handleCreateReservation(roomid) {
 
   const response_json = await response.json();
   console.log(response_json);
+  location.reload()
 }
-
-
-

@@ -60,6 +60,7 @@ async function getArticles() {
     const members = a['members']
     const book_id = a['id']
 
+    // 여기도 추가할 부분있음
     let temp_html = `<tr>
                         <th>${spot}</th>
                         <td>${room}</td>
@@ -152,6 +153,7 @@ async function createReview(book_id) {
   $('#reviewsavediv').append(temp_html);
 }
 
+// 여기 추가
 var savedBookId;
 function savedBookId(book_id) {
   savedRoomId = book_id;

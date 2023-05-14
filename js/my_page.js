@@ -42,7 +42,6 @@ async function getArticles() {
   const response_json = await response.json()
   $('#myreview_info').empty()
   response_json['reviews'].forEach((a) => {
-    const context = a['context']
     const room = a['room']
     const title = a['title']
     const spot = a['spot']
@@ -53,7 +52,6 @@ async function getArticles() {
                       <th>${spot}</th>
                       <td>${room}</td>
                       <td>${title}</td>
-                      <td>${context}</td>
                       <td>${star}</td>
                       <td><a class="cp-button secondary" type="button" onclick="getDetailReview(${review_id})" data-bs-toggle="modal" data-bs-target="#myreview">상세</a></td>
                   </tr>

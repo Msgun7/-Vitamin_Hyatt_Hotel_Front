@@ -1,6 +1,6 @@
-window.onload = () => {
-    console.log('자바스크립트 불러왔음!')
-}
+// 기본 URL
+const backend_base_url = "http://127.0.0.1:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
 
 async function handleSignup() {
     const username = document.getElementById("username").value
@@ -108,7 +108,6 @@ async function getUserprofile() {
 
     if (response.status == 200) {
         const response_json = await response.json()
-        console.log("성공")
         return response_json
     } else {
         alert("불러오는데 실패했습니다")

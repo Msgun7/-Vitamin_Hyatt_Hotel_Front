@@ -18,9 +18,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+
   <script src="/js/api.js"></script>
   <script src="/js/loader.js"></script>
   <script src="/js/my_page.js"></script>
+  <script src="/js/review.js"></script>
+
   <link href="/css/styles/style.css" rel="stylesheet" type="text/css" />
   <link href="/css/styles/theme.css" rel="stylesheet" type="text/css" />
   <link href="/css/styles/eunsu.css" rel="stylesheet" type="text/css" />
@@ -240,7 +243,7 @@
       </div>
     </div>
   </div>
-  <!-- 예약 상세 조회 모달창 -->
+  <!-- 예약 상세 조회 모달창 여기 넣기-->
   <div class="modal fade" id="mybook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -248,7 +251,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             예약 내역</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+        </div>book
         <form>
           <div class="modal-body" id="myreservation-info">
             <h6 id="book-username">Name : 김미영</h6>
@@ -257,8 +260,11 @@
             <input name="phone" type="text" class="form-control" placeholder="phone" id="book-phone">
             <input name="password" type="password" class="form-control" placeholder="Password" id="book-password">
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">예약 삭제
+          <div id="reservationdeletediv" class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
+            </button>
+            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete()">
+              예약취소
             </button>
           </div>
         </form>

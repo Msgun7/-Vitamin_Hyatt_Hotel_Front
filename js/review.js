@@ -2,6 +2,7 @@ async function getReviews() {
   params = new URLSearchParams(window.location.search);
   room_id = params.get("room_id");
   const response = await fetch(`http://127.0.0.1:8000/reviews/room/${room_id}/`, {
+
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("access"),
@@ -40,6 +41,7 @@ async function getReviews() {
   });
 }
 getReviews();
+
 var savedRoomId;
 function saveRoomId(roomid) {
   savedRoomId = roomid;
@@ -54,6 +56,7 @@ function saveRoomId(roomid) {
     `;
   $("#reservationsavediv").append(temp_html);
 }
+
 async function handleCreateReservation(roomid) {
   const bookuser = document.getElementById('bookuser').value;
   const booknumber = document.getElementById('booknumber').value;
@@ -69,6 +72,7 @@ async function handleCreateReservation(roomid) {
   };
 
   const response = await fetch(`http://127.0.0.1:8000/manager/rooms/book/${roomid}/`, {
+
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -77,14 +81,17 @@ async function handleCreateReservation(roomid) {
     body: JSON.stringify(data)
   });
 
+  const response_json = await response.json();
+  console.log(response_json);
 
   if (response.status == 201) {
     const response_json = await response.json()
     alert("예약 완료!")
+    location.reload()
+    
     return response_json
   } else {
     alert("이미 예약된 날짜입니다. 다른 날짜로 예약해주세요!")
   }
-
 }
 

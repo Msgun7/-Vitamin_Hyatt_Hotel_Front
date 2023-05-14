@@ -140,7 +140,7 @@ async function updateUserprofile() {
             "Authorization": `Bearer ${token}`,
             'content-type': 'application/json',
         },
-        method: 'PATCH',
+        method: 'PUT',
         body: JSON.stringify(bodyData)
     })
     console.log(response)

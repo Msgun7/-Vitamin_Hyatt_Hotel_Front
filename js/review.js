@@ -3,7 +3,7 @@ async function getReviews() {
   params = new URLSearchParams(window.location.search)
   room_id = params.get('room_id')
 
-  const response = await fetch(`http://127.0.0.1:8000/reviews/room/${room_id}/`, {
+  const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -106,7 +106,7 @@ async function handleCreateReservation(roomid) {
   }
 
 
-  const response = await fetch(`http://127.0.0.1:8000/manager/rooms/book/${roomid}/`, {
+  const response = await fetch(`h${backend_base_url}/manager/rooms/book/${roomid}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

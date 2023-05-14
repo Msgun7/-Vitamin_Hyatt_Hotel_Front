@@ -21,7 +21,7 @@ async function getArticles() {
   const payload = JSON.parse(localStorage.getItem("payload")).user_id
   // console.log(payload)
 
-  const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${payload}/`, {
+  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -87,7 +87,7 @@ getArticles();
 async function getDetailBook(book_id) {
   // console.log("디테일 북")
 
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -153,7 +153,7 @@ async function handleReviewCreate(book_id) {
     "stars": stars
   };
 
-  const response = await fetch(`http://127.0.0.1:8000/users/myreservation/${book_id}/`, {
+  const response = await fetch(`${backend_base_url}/users/myreservation/${book_id}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")

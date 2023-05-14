@@ -2,7 +2,7 @@
 async function getReviews() {
   params = new URLSearchParams(window.location.search)
   room_id = params.get('room_id')
-  
+
   const response = await fetch(`${backend_base_url}/reviews/room/${room_id}/`, {
     headers: {
       'Content-Type': 'application/json',
@@ -44,12 +44,12 @@ async function getReviews() {
     $('#roomreview_info').append(temp_html)
   })
 
-  if (response.status == 200) {
-    const response_json = await response.json()
-    return response_json
-  } else {
-    alert("불러오는데 실패했습니다!")
-  }
+  // if (response.status == 200) {
+  //   const response_json = await response.json()
+  //   return response_json
+  // } else {
+  //   alert("불러오는데 실패했습니다!")
+  // }
 }
 
 getReviews();
@@ -87,26 +87,8 @@ async function handleCreateReservation(roomid) {
     "check_in": check_in,
     "check_out": check_out
   };
-  async function handlesReservationDelete() {
-    let token = localStorage.getItem("access")
-    const payload = localStorage.getItem("payload");
-    const payload_parse = JSON.parse(payload)
 
-    const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
-      method: 'DELETE',
-    })
-
-    localStorage.removeItem("access")
-    localStorage.removeItem("refresh")
-    localStorage.removeItem("payload")
-    window.location.replace(`${frontend_base_url}/index.html`)
-  }
-
-
-  const response = await fetch(`h${backend_base_url}/manager/rooms/book/${roomid}/`, {
+  const response = await fetch(`${backend_base_url}/manager/rooms/book/${roomid}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("access")
@@ -117,4 +99,23 @@ async function handleCreateReservation(roomid) {
 
   const response_json = await response.json();
   console.log(response_json);
+}
+
+
+async function handlesReservationDelete() {
+  let token = localStorage.getItem("access")
+  const payload = localStorage.getItem("payload");
+  const payload_parse = JSON.parse(payload)
+
+  const response = await fetch(`${backend_base_url}/users/mypagelist/${payload_parse.user_id}/`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    method: 'DELETE',
+  })
+
+  localStorage.removeItem("access")
+  localStorage.removeItem("refresh")
+  localStorage.removeItem("payload")
+  window.location.replace(`${frontend_base_url}/index.html`)
 }

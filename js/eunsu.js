@@ -30,7 +30,7 @@ async function RoomviewBySpot(event) {
     const roomid = a["id"]
 
     // 변수 하나를 0으로 해서 count ++ 
-    let temp = `< a href = "/review_detail.html?room_id=${roomid}" >
+    let temp = `<a href = "/review_detail.html?room_id=${roomid}" >
                 <section class="cp-card content">
                     <div class="thumb" style="background-image: url(${image});">
                     </div>

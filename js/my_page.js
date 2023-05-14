@@ -78,8 +78,6 @@ async function getArticles() {
                     style="width: 120px; font-size:15px" >예약상세</a></td>
                   </tr>
   `
-    $('#mybook_info').append(temp_html)
-    return book_id
 
 
     let mybook_temp_html = `<tr>
@@ -97,6 +95,7 @@ async function getArticles() {
       $('#mybook_info').append(mybook_temp_html)
     } else if (check_in <= today && today <= check_out) {
       $('#current_book_info').append(temp_html)
+
     } else {
       $('#current_book_info').append(temp_html)
     }

@@ -1,5 +1,6 @@
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {
+    const accessToken = localStorage.getItem('access')
     const name = document.getElementById("name").value;
     const max_members = parseInt(document.getElementById("max_members").value);
     const spot = document.getElementById("spot").value;
@@ -20,6 +21,9 @@ async function createRoom() {
 
 
     response = await fetch(`http://127.0.0.1:8000/manager/rooms/`, {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        },
         method: 'POST',
         body: formData
     })

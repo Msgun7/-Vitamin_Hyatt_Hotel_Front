@@ -85,7 +85,7 @@ $(document).ready(function () {
         let check_out_day = check_out.getDate()
 
         // 예약한 날짜에 해당하는 달에만 보여줌
-        if (check_in_month === thisMonth.getMonth() || check_out_month === thisMonth.getMonth()) {
+        if ((check_in_month === thisMonth.getMonth() || check_out_month === thisMonth.getMonth()) && check_in >= today) {
           if (check_in_year === thisMonth.getFullYear()) {
             let startDay = (check_in_month === thisMonth.getMonth()) ? check_in.getDate() : 1; // 체크인 날짜의 일
             let endDay = (check_out_month === thisMonth.getMonth()) ? check_out.getDate() : getMonthLastDate(thisMonth); // 체크아웃 날짜의 일

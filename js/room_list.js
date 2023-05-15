@@ -91,11 +91,10 @@ roomList()
 
 // 객실삭제
 async function handleRoomDelete(room_id) {
-  let token = localStorage.getItem("access")
-
-  const response = await fetch(`${backend_base_url}/manager/rooms/${room_id}/`, {
+  const accessToken = localStorage.getItem('access')
+  const response = await fetch(`http://127.0.0.1:8000/manager/rooms/${room_id}/`, {
     headers: {
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${accessToken}`
     },
     method: 'DELETE',
   })

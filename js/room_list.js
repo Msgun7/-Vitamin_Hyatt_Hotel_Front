@@ -93,7 +93,7 @@ roomList()
 async function handleRoomDelete(room_id) {
   let token = localStorage.getItem("access")
 
-  const response = await fetch(`${backend_base_url}/manager/rooms/${room_id}/`, {
+  const response = await fetch(`http://127.0.0.1:8000/manager/rooms/${room_id}/`, {
     headers: {
       "Authorization": `Bearer ${token}`
     },

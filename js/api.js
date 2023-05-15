@@ -1,6 +1,6 @@
-window.onload = () => {
-    console.log('자바스크립트 불러왔음!')
-}
+// 기본 URL
+const backend_base_url = "http://127.0.0.1:8000"
+const frontend_base_url = "http://127.0.0.1:5500"
 
 async function handleSignup() {
     const username = document.getElementById("username").value
@@ -8,7 +8,6 @@ async function handleSignup() {
     const password = document.getElementById("password").value
     const password2 = document.getElementById("password2").value
     const phone = document.getElementById("phone").value
-    console.log(username, email, password, password2, phone)
 
     const response = await fetch(`http://127.0.0.1:8000/users/signup/`, {
         headers: {
@@ -34,7 +33,6 @@ async function handleSignup() {
 
         const regex = /string='([^']+)'/;
         const match = JSON.stringify(response_json).match(regex)
-        console.log(match)
 
         if (match && match.length > 1) {
             const cleanedString = match[1].replace("string=", "");
@@ -64,7 +62,6 @@ async function handleSignin() {
     if (response.status == 200) {
         const response_json = await response.json()
 
-        console.log(response_json)
 
         // localstorage에 저장하기
         localStorage.setItem('refresh', response_json.refresh)
@@ -108,7 +105,6 @@ async function getUserprofile() {
 
     if (response.status == 200) {
         const response_json = await response.json()
-        console.log("성공")
         return response_json
     } else {
         alert("불러오는데 실패했습니다")
@@ -121,8 +117,6 @@ async function updateUserprofile() {
     let token = localStorage.getItem("access")
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.email)
-    console.log("1")
 
     const password = document.getElementById('newpassword').value;
     const phone = document.getElementById('newphone').value;
@@ -143,7 +137,6 @@ async function updateUserprofile() {
         method: 'PUT',
         body: JSON.stringify(bodyData)
     })
-    console.log(response)
 
     if (response.status == 200) {
         alert("회원정보가 변경되었습니다!")
@@ -196,12 +189,28 @@ function checkLogin() {
 }
 
 // 관리자계정인지 판단
-function checkAdmin() {
+async function checkAdmin() {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.is_admin)
 
-    if (payload_parse.is_admin === false) {
+    if (payload === null) {
         window.location.replace(`http://127.0.0.1:5500/index.html`)
+    } else {
+        const accessToken = localStorage.getItem('access')
+        const user_id = payload_parse['user_id']
+        const response = await fetch(`http://127.0.0.1:8000/users/mypagelist/${user_id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            method: 'GET',
+        })
+        let admin = await response.json()
+        if (admin['is_admin']) {
+            is_admin = admin['is_admin']
+            return true
+        } else {
+            window.location.replace(`http://127.0.0.1:5500/index.html`)
+        }
     }
 }

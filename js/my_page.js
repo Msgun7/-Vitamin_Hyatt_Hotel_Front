@@ -84,9 +84,7 @@ async function getArticles() {
                                         <td>${room}</td>
                                         <td>${check_in.toLocaleDateString()}</td>
                                         <td>${check_out.toLocaleDateString()}</td>
-                                        <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                                        style="width: 120px; font-size:15px" >예약 상세</a></td>
-                                        <td><a class="cp-button secondary" type="button" onclick="handleReviewCreate(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                                        <td><a class="cp-button secondary" type="button" onclick="createReview(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
                                         style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
                                     </tr>
                     `
@@ -153,7 +151,6 @@ async function createReview(book_id) {
               Save
             </button>
     `
-
   $('#reviewsavediv').append(temp_html);
 }
 

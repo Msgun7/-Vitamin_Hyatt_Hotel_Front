@@ -31,6 +31,7 @@ async function createRoom() {
     .then(response => response.json())
 
     .then(data => {
+      print(data.name[0])
       const nameError = data.name[0] || null;
       const maxMembersError = data.max_members[0] || null;
       const descriptionError = data.description[0] || null;

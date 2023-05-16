@@ -102,7 +102,7 @@
                 <th>객실 이름</th>
                 <th>제목</th>
                 <th>별점</th>
-                <th>예약상세</th>
+                <th>관리</th>
               </tr>
             </thead>
             <tbody id="myreview_info">
@@ -205,7 +205,7 @@
     </div>
   </div>
   <!-- 후기 작성 모달창 -->
-  <div class="modal fade" id="review" tabindex="-1" aria-labelledby="su" aria-hidden="true">
+  <div class="modal fade" id="myreview" tabindex="-1" aria-labelledby="su" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -256,16 +256,14 @@
           <div id="reservationdeletediv" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
             </button>
-            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete()">
-              예약취소
-            </button>
+
           </div>
         </form>
       </div>
     </div>
   </div>
   <!-- 리뷰 상세 조회 모달창 -->
-  <div class="modal fade" id="myreview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="reviewdetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -279,11 +277,6 @@
       </div>
       </form>
       <div id="reviewsavediv" class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
-        </button>
-        <button type="button" id="myreview-save" class="btn btn-primary" style="float: right" onclick="">
-          Save
-        </button>
       </div>
     </div>
   </div>

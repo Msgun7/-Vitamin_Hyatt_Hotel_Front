@@ -53,7 +53,7 @@ async function getArticles() {
                       <td>${room}</td>
                       <td>${title}</td>
                       <td>${star}</td>
-                      <td><a class="cp-button secondary" type="button" onclick="getDetailReview(${review_id})" data-bs-toggle="modal" data-bs-target="#myreview">상세</a></td>
+                      <td><a class="cp-button secondary" type="button" onclick="getDetailReview(${review_id})" data-bs-toggle="modal" data-bs-target="#reviewdetail">상세</a></td>
                   </tr>
 `
     $('#myreview_info').append(temp_html)
@@ -211,7 +211,7 @@ async function getDetailReview(review_id) {
                       <p class="content">제목 : ${title}</p>
                       <p class="content">내용 : ${context}</p>
                       <p class="content">별점 : ${stars}</p>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기
                       </button>
                       <div class="modal-footer">`
 

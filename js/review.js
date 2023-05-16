@@ -18,10 +18,11 @@ async function getReviews() {
   const price = response_json['price']
   const max_members = response_json['max_members']
   const roomid = response_json['id']
+  const formattedPrice = price.toLocaleString('ko-KR') + '원'
   let temp_html = `
                       <h3>${name}</h3>
                       <p class="content">설명 : ${description}</p>
-                      <p class="content">가격 : ${price}</p>
+                      <p class="content">가격 : ${formattedPrice}</p>
                       <p class="content">최대 인원 : ${max_members}</p>
                       <a class="cp-button secondary" type="button" onclick="saveRoomId(${roomid})" data-bs-toggle="modal" data-bs-target="#book">예약하기</a>`;
   $("#detailroom-info").append(temp_html);

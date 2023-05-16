@@ -102,7 +102,7 @@
                 <th>객실 이름</th>
                 <th>제목</th>
                 <th>별점</th>
-                <th>관리</th>
+                <th>예약상세</th>
               </tr>
             </thead>
             <tbody id="myreview_info">
@@ -256,7 +256,9 @@
           <div id="reservationdeletediv" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
             </button>
-
+            <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete()">
+              예약취소
+            </button>
           </div>
         </form>
       </div>

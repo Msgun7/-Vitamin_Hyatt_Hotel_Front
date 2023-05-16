@@ -1,6 +1,5 @@
 // 객실 등록 필요한 데이터들을 받아오도록 
 async function createRoom() {
-  console.log("확인")
   const accessToken = localStorage.getItem('access')
   const name = document.getElementById("name").value;
   const max_members = parseInt(document.getElementById("max_members").value);

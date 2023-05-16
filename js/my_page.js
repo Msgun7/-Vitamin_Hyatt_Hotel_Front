@@ -1,9 +1,9 @@
 checkLogin()
 
-// 기본 URL
-//const backend_base_url = "http://127.0.0.1:8000"
-// const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
-//const frontend_base_url = "http://127.0.0.1:5500"
+// // 기본 URL
+// const backend_base_url = "http://127.0.0.1:8000"
+// // const backend_base_url = "http://ec2-3-39-193-171.ap-northeast-2.compute.amazonaws.com:8000"
+// const frontend_base_url = "http://127.0.0.1:5500"
 
 
 async function loadUserprofile() {
@@ -70,14 +70,14 @@ async function getArticles() {
     const book_id = a['id']
 
     let temp_html = `<tr>
-                    <th>${spot}</th>
-                    <td>${room}</td>
-                    <td>${check_in.toLocaleDateString()}</td>
-                    <td>${check_out.toLocaleDateString()}</td>
-                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
-                    style="width: 120px; font-size:15px" >예약상세</a></td>
-                  </tr>
-  `
+                      <th>${spot}</th>
+                      <td>${room}</td>
+                      <td>${check_in.toLocaleDateString()}</td>
+                      <td>${check_out.toLocaleDateString()}</td>
+                      <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id}), savedBookId(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                      style="width: 120px; font-size:15px" >예약상세</a></td>
+                </tr>
+`
 
 
     let mybook_temp_html = `<tr>
@@ -153,6 +153,7 @@ async function createReview(book_id) {
             </button>
     `
   $('#reviewsavediv').append(temp_html);
+
 }
 
 
@@ -181,6 +182,7 @@ async function handleReviewCreate(book_id) {
   const response_json = await response.json();
   console.log(response_json);
   createReview(book_id);
+  window.location.reload()
 }
 
 
@@ -221,4 +223,39 @@ async function getDetailReview(review_id) {
   } else {
     alert("불러오는데 실패했습니다!")
   }
+}
+var savedBookId;
+function savedBookId(book_id) {
+  savedRoomId = book_id;
+  document.getElementById('reservationdeletediv');
+  console.log(book_id);
+
+  $('#reservationdeletediv').empty();
+  let temp_html = `
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기
+                  </button>
+                  <button type="button" class="btn btn-primary" style="float: right" onclick="handleReservationDelete(${book_id})">
+                    예약취소
+                  </button>
+    `
+  $('#reservationdeletediv').append(temp_html);
+}
+
+async function handleReservationDelete(book_id) {
+  let token = localStorage.getItem("access")
+  console.log(book_id);
+
+  const response = await fetch(`http://127.0.0.1:8000/manager/rooms/book/${book_id}/`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    method: 'DELETE',
+  })
+  if (response.status == 204) {
+    alert("예약 취소가 정상적으로 처리되었습니다!")
+    location.reload()
+  } else {
+
+  }
+
 }

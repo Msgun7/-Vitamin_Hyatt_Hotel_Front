@@ -32,7 +32,7 @@ async function getReviews() {
     const context = a["context"];
     const stars = a["stars"];
     let temp_html = `<tr>
-                      <th>${user}</th>
+                      <th>${user[0]}**</th>
                       <td>${title}</td>
                       <td>${context}</td>
                       <td>${stars}</td>

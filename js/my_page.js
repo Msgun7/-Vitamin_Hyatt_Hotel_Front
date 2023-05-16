@@ -73,7 +73,7 @@ async function getArticles() {
                     <td>${room}</td>
                     <td>${check_in.toLocaleDateString()}</td>
                     <td>${check_out.toLocaleDateString()}</td>
-                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
+                    <td><a class="cp-button secondary" type="button" onclick="getDetailBook(${book_id}), saveBookID(${book_id});" data-bs-toggle="modal" data-bs-target="#mybook"
                     style="width: 120px; font-size:15px" >예약상세</a></td>
                   </tr>
   `
@@ -84,7 +84,7 @@ async function getArticles() {
                                         <td>${room}</td>
                                         <td>${check_in.toLocaleDateString()}</td>
                                         <td>${check_out.toLocaleDateString()}</td>
-                                        <td><a class="cp-button secondary" type="button" onclick="createReview(${book_id});" data-bs-toggle="modal" data-bs-target="#review"
+                                        <td><a class="cp-button secondary" type="button" onclick="createReview(${book_id});" data-bs-toggle="modal" data-bs-target="#myreview"
                                         style="width: 120px; font-size:13px" data-bs-dismiss="modal">예약 후기를 남겨주세요.</a></td>
                                     </tr>
                     `
@@ -209,6 +209,8 @@ async function getDetailReview(review_id) {
                       <p class="content">제목 : ${title}</p>
                       <p class="content">내용 : ${context}</p>
                       <p class="content">별점 : ${stars}</p>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기
+                      </button>
                       <div class="modal-footer">`
 
   $('#myreview-info').append(temp_html)

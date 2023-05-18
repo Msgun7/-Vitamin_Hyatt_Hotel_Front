@@ -28,27 +28,60 @@ async function createRoom() {
     body: formData
   })
 
-    .then(response => response.json())
+    // .then(data => {
+    //   console.log("테스트")
+    //   const nameError = data.name[0] || null;
+    //   const maxMembersError = data.max_members[0] || null;
+    //   const descriptionError = data.description[0] || null;
+    //   const priceError = data.price[0] || null;
 
-    .then(data => {
-      print(data.name[0])
-      const nameError = data.name[0] || null;
-      const maxMembersError = data.max_members[0] || null;
-      const descriptionError = data.description[0] || null;
-      const priceError = data.price[0] || null;
+    //   if (nameError) {
+    //     alert(`Name Error: ${nameError}`);
+    //   } else if (maxMembersError) {
+    //     alert(`Max Members Error: ${maxMembersError}`);
+    //   } else if (descriptionError) {
+    //     alert(`Description Error: ${descriptionError}`);
+    //   } else if (priceError) {
+    //     alert(`Price Error: ${priceError}`);
+    //   } else {
+    //     alert("객실이 등록되었습니다.");
+    //     window.location.reload();
+    //   }
+    // })
 
-      if (nameError && maxMembersError && descriptionError && priceError) {
-        const errorMessage = `Name Error: ${nameError}\nMax Members Error: ${maxMembersError}\nDescription Error: ${descriptionError}\nPrice Error: ${priceError}\n`;
-        alert(errorMessage);
-      }
-      else {
-        alert("객실이 등록되었습니다.");
-        window.location.reload();
+    // .catch(error => {
+    //   alert(error);
+    // });
+
+    .then(function (response) {
+      if (response.status === 201) {
+        // 성공적인 응답(200)의 경우 별도의 로직 실행
+        return response.json();
+      } else if (response.status === 400) {
+        // 에러 응답(400)의 경우 서버의 JSON 데이터를 alert
+        return response.json().then(function (data) {
+          for (let key in data) {
+            alert(`${key} : ${data[key]}`);
+          }
+          return Promise.reject('서버 에러')
+        });
+      } else {
+        // 다른 상태 코드의 경우 에러 처리
+        return Promise.reject('서버 응답 에러');
       }
     })
+    .then(function (data) {
+      // 별도의 로직 실행 (성공적인 응답인 경우에만 도달)
+      console.log(data);
+      alert("객실이 등록되었습니다.");
+    })
+    .catch(function (error) {
+      // 에러 처리
+      console.error(error);
 
-
-    .catch(error => {
-      alert("에러가 발생했습니다.");
+      // 에러 처리 후 다른 작업을 수행하고자 한다면 여기에 작성하세요.
     });
+
+
+
 }
